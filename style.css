@@ -4,6 +4,7 @@ h2 {
 }
 
 li {
+  font-family: Lato;
   display: list-item;
   text-align: -webkit-match-parent;
   list-style-type: disc;
@@ -14,4 +15,9 @@ li {
   padding-inline-start: 40px;
   padding-bottom: 10px;
   border-bottom: 1px solid #e0e0e0;
+}
+
+h4 {
+  font-family: Lato;
+  color: rgb(40, 56, 66);
 }

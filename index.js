@@ -64,7 +64,16 @@ console.warn('getMyCalenderEvents');
 // Send a GET request for all events in a date range
 
 var calendarKey = 'ks91nc4hq4vimq69g2';
-var url = `https://api.teamup.com/${calendarKey}/events`;
+
+const currentDate = new Date();
+const startDateParam = formatDate(currentDate);
+const endDateParam = formatDate(currentDate.setDate(currentDate.getDate() + 1));
+
+//Passing Date range for events
+const url = `https://api.teamup.com/${calendarKey}/events?startDate=${startDateParam}&endDate=${endDateParam}`;
+
+//Only Todays events
+// const url = `https://api.teamup.com/${calendarKey}/events`;
 
 makeCorsRequest(
   url,
@@ -73,6 +82,8 @@ makeCorsRequest(
     console.warn('Total no. of Events');
 
     var listOfEvents = ``;
+    var listOfEventsArr = [];
+    var groupArrays = [];
 
     if (response && response['events']) {
       if (response['events'].length !== 0) {
@@ -134,12 +145,47 @@ makeCorsRequest(
           console.warn('isCurrentTimeBetween');
           console.log(isCurrentTimeBetween);
 
-          if (isCurrentTimeBetween) {
-            listOfEvents += `<li> <span style="background-color:#c5e1a5">${startTimeStr} - ${endTimeStr} | ${item.title}</span> | ${zoomButtonLink}</li>`;
-          } else {
-            listOfEvents += `<li>${startTimeStr} - ${endTimeStr} | ${item.title} | ${zoomButtonLink}</li>`;
-          }
+          listOfEventsArr.push({
+            title: item.title,
+            rawStartTime: item.start_dt,
+            startTimeStr: startTimeStr,
+            endTimeStr: endTimeStr,
+            zoomButtonLink: zoomButtonLink,
+            isCurrentTimeBetween: isCurrentTimeBetween,
+          });
         }); //end of response['events'].map((item)
+
+        // this gives an object with dates as keys
+        const groups = listOfEventsArr.reduce((groups, game) => {
+          const date = new Date(game.rawStartTime).toDateString();
+          if (!groups[date]) {
+            groups[date] = [];
+          }
+          groups[date].push(game);
+          return groups;
+        }, {});
+
+        // Edit: to add it in the array format instead
+        groupArrays = Object.keys(groups).map((date) => {
+          return {
+            date,
+            events: groups[date],
+          };
+        });
+
+        console.warn('groupArrays');
+        console.log(groupArrays);
+
+        groupArrays.forEach((group) => {
+          listOfEvents += `<h4> ${group.date}</h4>`;
+          group.events.forEach((item) => {
+            if (item.isCurrentTimeBetween) {
+              listOfEvents += `<li> <span style="background-color:#c5e1a5">${item.startTimeStr} - ${item.endTimeStr} &emsp; ${item.title}</span> &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
+            } else {
+              listOfEvents += `<li>${item.startTimeStr} - ${item.endTimeStr} &emsp; ${item.title} &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
+            }
+          });
+        });
 
         listOfEvents += '</ul>';
       } //end of if (response['events'].length !== 0)
@@ -157,3 +203,15 @@ makeCorsRequest(
   }
 );
 // }
+
+function formatDate(date) {
+  var d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return [year, month, day].join('-');
+}
