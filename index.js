@@ -70,30 +70,47 @@ makeCorsRequest(
   url,
   function (xhr) {
     var response = JSON.parse(xhr.responseText);
-    console.log('Successfully Received: ' + JSON.stringify(response));
+    console.warn('Total no. of Events');
 
     var listOfEvents = ``;
 
     if (response && response['events']) {
       if (response['events'].length !== 0) {
+        console.log(response['events'].length);
+
         listOfEvents = '<ul>';
-        response['events'].map((event) => {
-          listOfEvents += `<li>${new Date(event.start_dt).toLocaleString(
+        let parser = new DOMParser();
+
+        response['events'].map((item) => {
+          ////////////////Create Zoom button link////////////////
+          var htmlDoc = parser.parseFromString(item.notes, 'text/html');
+          var zoomButtonLink = '';
+
+          if (htmlDoc && htmlDoc.getElementsByTagName('p')) {
+            zoomButtonLink = htmlDoc.getElementsByTagName('p')[0].innerHTML;
+
+            // console.warn('zoomButtonLink');
+            // console.log(zoomButtonLink);
+          }
+          ////////////////Create Zoom button link////////////////
+
+          listOfEvents += `<li>${new Date(item.start_dt).toLocaleString(
             'en-US',
             {
               hour: 'numeric',
               minute: 'numeric',
               hour12: true,
             }
-          )} - ${new Date(event.end_dt).toLocaleString('en-US', {
+          )} - ${new Date(item.end_dt).toLocaleString('en-US', {
             hour: 'numeric',
             minute: 'numeric',
             hour12: true,
-          })} | ${event.title}</li>`;
-        });
+          })} | ${item.title} | ${zoomButtonLink}</li>`;
+        }); //end of response['events'].map((item)
+
         listOfEvents += '</ul>';
-      }
-    }
+      } //end of if (response['events'].length !== 0)
+    } //end of if if (response && response['events'])
 
     // Write Javascript code!
     const appDiv = document.getElementById('app');
@@ -107,9 +124,3 @@ makeCorsRequest(
   }
 );
 // }
-
-// document.addEventListener('DOMContentLoaded', function () {
-//   console.warn('DOMContentLoaded');
-//   const button = document.getElementById('testButton');
-//   button.addEventListener('click', getMyCalenderEvents);
-// });
