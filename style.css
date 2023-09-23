@@ -12,4 +12,6 @@ li {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   padding-inline-start: 40px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
 }
