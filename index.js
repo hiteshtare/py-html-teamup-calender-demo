@@ -104,7 +104,7 @@ makeCorsRequest(
           const currentTime =
             new Date().getHours() * 60 + new Date().getMinutes();
           // console.warn('currentTime');
-          console.log(currentTime);
+          // console.log(currentTime);
 
           const startTimeStr = new Date(item.start_dt).toLocaleString('en-US', {
             hour: 'numeric',
