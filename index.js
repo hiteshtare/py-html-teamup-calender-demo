@@ -94,18 +94,55 @@ makeCorsRequest(
           }
           ////////////////Create Zoom button link////////////////
 
-          listOfEvents += `<li>${new Date(item.start_dt).toLocaleString(
+          const currentDateValue = '2023-09-23T07:00:00+05:30';
+          const currentDateStr = new Date(currentDateValue).toLocaleString(
             'en-US',
             {
               hour: 'numeric',
               minute: 'numeric',
               hour12: true,
             }
-          )} - ${new Date(item.end_dt).toLocaleString('en-US', {
+          );
+
+          const currentTime =
+            new Date(currentDateValue).getHours() * 60 +
+            new Date(currentDateValue).getMinutes();
+          // console.warn('currentTime');
+          console.log(currentTime);
+
+          const startTimeStr = new Date(item.start_dt).toLocaleString('en-US', {
             hour: 'numeric',
             minute: 'numeric',
             hour12: true,
-          })} | ${item.title} | ${zoomButtonLink}</li>`;
+          });
+          const startTime =
+            new Date(item.start_dt).getHours() * 60 +
+            new Date(item.start_dt).getMinutes();
+          // console.warn('startTime');
+          // console.log(startTime);
+
+          const endTimeStr = new Date(item.end_dt).toLocaleString('en-US', {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
+          });
+          const endTime =
+            new Date(item.end_dt).getHours() * 60 +
+            new Date(item.end_dt).getMinutes();
+          // console.warn('endTime');
+          // console.log(endTime);
+
+          //To compare if current Time falls between the event Start and End time and highlight event accordingly
+          const isCurrentTimeBetween =
+            startTime <= currentTime && currentTime <= endTime;
+          console.warn('isCurrentTimeBetween');
+          console.log(isCurrentTimeBetween);
+
+          if (isCurrentTimeBetween) {
+            listOfEvents += `<li> <span style="background-color:#c5e1a5">${startTimeStr} - ${endTimeStr} | ${item.title}</span> | ${zoomButtonLink}</li>`;
+          } else {
+            listOfEvents += `<li>${startTimeStr} - ${endTimeStr} | ${item.title} | ${zoomButtonLink}</li>`;
+          }
         }); //end of response['events'].map((item)
 
         listOfEvents += '</ul>';
