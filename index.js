@@ -139,9 +139,11 @@ makeCorsRequest(
           // console.warn('endTime');
           // console.log(endTime);
 
-          //To compare if current Time falls between the event Start and End time and highlight event accordingly
+          //To compare if current Time falls between the event Start and End time and Date is also same then highlight event accordingly
           const isCurrentTimeBetween =
-            startTime <= currentTime && currentTime <= endTime;
+            startTime <= currentTime &&
+            currentTime <= endTime &&
+            new Date(item.start_dt).getDate() == new Date().getDate();
           console.warn('isCurrentTimeBetween');
           console.log(isCurrentTimeBetween);
 
