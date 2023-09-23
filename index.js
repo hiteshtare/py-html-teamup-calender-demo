@@ -94,19 +94,15 @@ makeCorsRequest(
           }
           ////////////////Create Zoom button link////////////////
 
-          const currentDateValue = '2023-09-23T07:00:00+05:30';
-          const currentDateStr = new Date(currentDateValue).toLocaleString(
-            'en-US',
-            {
-              hour: 'numeric',
-              minute: 'numeric',
-              hour12: true,
-            }
-          );
+          // const currentDateValue = '2023-09-23T07:00:00+05:30';
+          const currentDateStr = new Date().toLocaleString('en-US', {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true,
+          });
 
           const currentTime =
-            new Date(currentDateValue).getHours() * 60 +
-            new Date(currentDateValue).getMinutes();
+            new Date().getHours() * 60 + new Date().getMinutes();
           // console.warn('currentTime');
           console.log(currentTime);
 
