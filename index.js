@@ -147,11 +147,29 @@ makeCorsRequest(
           console.warn('isCurrentTimeBetween');
           console.log(isCurrentTimeBetween);
 
+          let calenderColor = '#283842';
+
+          switch (item.subcalendar_id) {
+            case 12582899:
+              calenderColor = '#2951B9';
+              break;
+            case 12582900:
+              calenderColor = '#B20D47';
+              break;
+            case 12582894:
+              calenderColor = '#CA7609';
+              break;
+
+            default:
+              break;
+          }
+
           listOfEventsArr.push({
             title: item.title,
             rawStartTime: item.start_dt,
             startTimeStr: startTimeStr,
             endTimeStr: endTimeStr,
+            calenderColor: calenderColor,
             zoomButtonLink: zoomButtonLink,
             isCurrentTimeBetween: isCurrentTimeBetween,
           });
@@ -186,10 +204,12 @@ makeCorsRequest(
           }`;
 
           group.events.forEach((item) => {
+            const liStyle = `style="color:${item.calenderColor}"`;
+
             if (item.isCurrentTimeBetween) {
-              listOfEvents += `<li> <span style="background-color:#c5e1a5">${item.startTimeStr} - ${item.endTimeStr} &emsp; ${item.title}</span> &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
+              listOfEvents += `<li ${liStyle}> <span style="background-color:#c5e1a5;color: #283842">${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
             } else {
-              listOfEvents += `<li>${item.startTimeStr} - ${item.endTimeStr} &emsp; ${item.title} &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
+              listOfEvents += `<li ${liStyle}>${item.startTimeStr} - ${item.endTimeStr} &emsp; ${item.title} &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
             }
           });
         });
