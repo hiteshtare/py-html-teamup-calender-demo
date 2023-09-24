@@ -178,8 +178,13 @@ makeCorsRequest(
         console.warn('groupArrays');
         console.log(groupArrays);
 
-        groupArrays.forEach((group) => {
-          listOfEvents += `<h4> ${group.date}</h4>`;
+        groupArrays.forEach((group, index) => {
+          listOfEvents += `${
+            index === 0
+              ? `<h4 style="color:#75420a"> ${group.date} <i>— Today</i></h4>`
+              : `<h4> ${group.date}</h4>`
+          }`;
+
           group.events.forEach((item) => {
             if (item.isCurrentTimeBetween) {
               listOfEvents += `<li> <span style="background-color:#c5e1a5">${item.startTimeStr} - ${item.endTimeStr} &emsp; ${item.title}</span> &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
