@@ -22,3 +22,39 @@ h4 {
   font-family: Lato;
   color: rgb(40, 56, 66);
 }
+
+.live-indicator-block .live-indicator {
+  font-family: Lato;
+  background: #ea2429;
+  color: #fff;
+  padding: 5px;
+  line-height: 1;
+  border-radius: 6px;
+  text-transform: uppercase;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: bold;
+  width: auto;
+  height: 12px;
+}
+
+.indicator.online {
+  vertical-align: middle;
+  background: #fff;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  -webkit-animation: pulse-animation 1s cubic-bezier(0.5, 0, 1, 1) infinite
+    alternate;
+}
+
+@-webkit-keyframes pulse-animation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

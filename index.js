@@ -206,8 +206,15 @@ makeCorsRequest(
           group.events.forEach((item) => {
             const liStyle = `style="color:${item.calenderColor}"`;
 
+            const liveIndicatorBlock = `<span class="live-indicator-block">
+            <span class="live-indicator">
+            <span class="indicator online"></span>
+            <span style="padding: 2px;
+               vertical-align: top;">Live</span>
+            </span>
+            </span>`;
             if (item.isCurrentTimeBetween) {
-              listOfEvents += `<li ${liStyle}> <span style="background-color:#c5e1a5;color: #283842">${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
+              listOfEvents += `<li ${liStyle}> ${liveIndicatorBlock} <span>${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
             } else {
               listOfEvents += `<li ${liStyle}>${item.startTimeStr} - ${item.endTimeStr} &emsp; ${item.title} &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
             }
