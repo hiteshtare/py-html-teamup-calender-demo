@@ -214,7 +214,7 @@ makeCorsRequest(
             </span>
             </span>`;
             if (item.isCurrentTimeBetween) {
-              listOfEvents += `<li ${liStyle}><span>${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} &ensp;|&ensp; ${item.zoomButtonLink} ${liveIndicatorBlock}</li>`;
+              listOfEvents += `<li ${liStyle}> ${liveIndicatorBlock} <span>${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
             } else {
               listOfEvents += `<li ${liStyle}>${item.startTimeStr} - ${item.endTimeStr} &emsp; ${item.title} &ensp;|&ensp; ${item.zoomButtonLink}</li>`;
             }
