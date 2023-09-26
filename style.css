@@ -20,7 +20,7 @@ li {
 
 h4 {
   font-family: Lato;
-  color: #4f4e49;
+  color: #4f4e49 !important;
 }
 
 .live-indicator-block .live-indicator {
