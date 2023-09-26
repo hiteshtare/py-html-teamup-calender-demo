@@ -206,7 +206,7 @@ makeCorsRequest(
         groupArrays.forEach((group, index) => {
           listOfEvents += `${
             index === 0
-              ? `<h4><b style="color:#000">Today</b> ${group.date}</h4>`
+              ? `<h4><i>Today</i> — ${group.date}</h4>`
               : `<h4> ${group.date}</h4>`
           }`;
 
