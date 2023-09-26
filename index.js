@@ -158,8 +158,17 @@ function makeCorsRequest(url, successCallback, errorCallback) {
               startTime <= currentTime &&
               currentTime <= endTime &&
               new Date(item.start_dt).getDate() == new Date().getDate();
-            console.warn('isCurrentTimeBetween');
-            console.log(isCurrentTimeBetween);
+            // console.warn('isCurrentTimeBetween');
+            // console.log(isCurrentTimeBetween);
+
+            const hasEndTimeOfEventAfterCurrentTime =
+              currentTime > endTime &&
+              new Date(item.start_dt).getDate() == new Date().getDate();
+
+            // console.warn('hasEndTimeOfEventAfterCurrentTime');
+            // console.log(hasEndTimeOfEventAfterCurrentTime);
+
+            if (hasEndTimeOfEventAfterCurrentTime) return;
 
             let calenderColor = '#283842';
 
@@ -201,6 +210,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
             if (!groups[date]) {
               groups[date] = [];
+              groups[date]['startDate'] = new Date(rawStartDate).getDate();
             }
             groups[date].push(game);
             return groups;
@@ -210,6 +220,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
           groupArrays = Object.keys(groups).map((date) => {
             return {
               date,
+              startDate: groups[date]['startDate'],
               events: groups[date],
             };
           });
@@ -219,7 +230,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
           groupArrays.forEach((group, index) => {
             listOfEvents += `${
-              index === 0
+              group.startDate === new Date().getDate()
                 ? `<h4><i>Today</i> — ${group.date}</h4>`
                 : `<h4> ${group.date}</h4>`
             }`;
