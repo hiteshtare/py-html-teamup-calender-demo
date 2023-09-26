@@ -214,9 +214,9 @@ makeCorsRequest(
             </span>
             </span>`;
             if (item.isCurrentTimeBetween) {
-              listOfEvents += `<li ${liStyle}> ${liveIndicatorBlock} <span>${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} <span style="color: rgb(40, 56, 66)"> &ensp;|&ensp; ${item.zoomButtonLink}</span></li>`;
+              listOfEvents += `<li ${liStyle}> ${liveIndicatorBlock} <span style="color: rgb(40, 56, 66)">${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} <span style="color: rgb(40, 56, 66)"> &ensp;|&ensp; ${item.zoomButtonLink}</span></li>`;
             } else {
-              listOfEvents += `<li ${liStyle}>${item.startTimeStr} - ${item.endTimeStr} &emsp; ${item.title} <span style="color: rgb(40, 56, 66)"> &ensp;|&ensp; ${item.zoomButtonLink}</span></li>`;
+              listOfEvents += `<li ${liStyle}><span style="color: rgb(40, 56, 66)">${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} <span style="color: rgb(40, 56, 66)"> &ensp;|&ensp; ${item.zoomButtonLink}</span></li>`;
             }
           });
         });
