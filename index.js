@@ -177,7 +177,14 @@ makeCorsRequest(
 
         // this gives an object with dates as keys
         const groups = listOfEventsArr.reduce((groups, game) => {
-          const date = new Date(game.rawStartTime).toDateString();
+          const rawStartDate = new Date(game.rawStartTime);
+          const date =
+            rawStartDate.getDate() +
+            ' ' +
+            rawStartDate.toLocaleString('default', { month: 'short' }) +
+            ' ' +
+            rawStartDate.getFullYear();
+
           if (!groups[date]) {
             groups[date] = [];
           }
@@ -199,7 +206,7 @@ makeCorsRequest(
         groupArrays.forEach((group, index) => {
           listOfEvents += `${
             index === 0
-              ? `<h4 style="color:#75420a"> ${group.date} <i>— Today</i></h4>`
+              ? `<h4><b style="color:#000">Today</b> ${group.date}</h4>`
               : `<h4> ${group.date}</h4>`
           }`;
 
