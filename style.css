@@ -216,6 +216,6 @@ input[type='checkbox'] {
   padding-left: 0.5em;
 }
 
-.filterButton--highlight::after {
+.button--highlight::after {
   content: '✓';
 }

@@ -5,6 +5,13 @@ import './style.css';
 
 import jQuery from 'jquery';
 
+var listOfEvents = ``;
+var listOfEventsArr = [];
+var listOfEventsArrCopy = [];
+var groupArrays = [];
+
+var selectedCheckboxes = [];
+
 jQuery(document).ready(function ($) {
   //Assign click event for Checkboxes
   const checkboxes = $('.checkbox');
@@ -114,13 +121,6 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
   xhr.send();
 }
-
-var listOfEvents = ``;
-var listOfEventsArr = [];
-var listOfEventsArrCopy = [];
-var groupArrays = [];
-
-var selectedCheckboxes = [];
 
 // self executing function here
 (function () {
