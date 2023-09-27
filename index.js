@@ -7,9 +7,9 @@ import jQuery from 'jquery';
 
 jQuery(document).ready(function ($) {
   //Assign click event for Checkboxes
-  const checkboxes = document.getElementsByClassName('checkbox');
+  const checkboxes = $('.checkbox');
   for (let checkbox of checkboxes) {
-    checkbox.addEventListener('click', function ($event) {
+    $(checkbox).click(function ($event) {
       var currentValue = +$event.target.value;
       var isChecked = $event.target.checked;
 
@@ -24,37 +24,37 @@ jQuery(document).ready(function ($) {
 
       var filteredHTML = getCuratedListOfEvents(true);
 
-      // Write Javascript code!
-      const appDiv = document.getElementById('mainContent');
-      appDiv.innerHTML = filteredHTML;
+      const appDiv = $('#mainContent');
+      if (appDiv.length !== 0) {
+        appDiv[0].innerHTML = filteredHTML;
+      }
     });
   }
 
   //Assign click event for Filter button
-  var button = document.getElementById('filter-button');
-  var container = document.getElementById('filterContent');
+  var container = $('#filterContent');
 
-  button.onclick = function (e) {
-    e.stopPropagation();
-    if (container.classList.contains('filters--active')) {
-      container.classList.remove('filters--active');
-    } else {
-      container.classList.add('filters--active');
+  $('#filter-button').click(function ($event) {
+    $event.stopPropagation();
+
+    if (container.length !== 0) {
+      if ($('#filterContent').hasClass('filters--active')) {
+        $('#filterContent').removeClass('filters--active');
+      } else {
+        $('#filterContent').addClass('filters--active');
+      }
     }
-  };
+  });
 
   container.onclick = function (e) {
     e.stopPropagation();
   };
 
-  // window.onclick = function () {
-  //   container.classList.remove('filters--active');
-  // };
-
   if (selectedCheckboxes.length != 0) {
-    button.classList.add('button--highlight');
+    $('#filterContent').addClass('filters--active');
+    $('#filter-button').addClass('button--highlight');
   } else {
-    button.classList.remove('button--highlight');
+    $('#filter-button').removeClass('button--highlight');
   }
 });
 // Creates a CORS request in a cross-browser manner
