@@ -283,9 +283,17 @@ function getCuratedListOfEvents(isFilter = false) {
     listOfEventsArr = listOfEventsArrCopy;
 
     selectedCheckboxes.forEach((selectedCheckbox) => {
-      filteredlistOfEventsArr = listOfEventsArr.filter((item) => {
-        return item.subcalendar_id == selectedCheckbox;
-      });
+      if (filteredlistOfEventsArr.length === 0) {
+        filteredlistOfEventsArr = listOfEventsArr.filter((item) => {
+          return item.subcalendar_id == selectedCheckbox;
+        });
+      } else {
+        filteredlistOfEventsArr = filteredlistOfEventsArr.concat(
+          listOfEventsArr.filter((item) => {
+            return item.subcalendar_id == selectedCheckbox;
+          })
+        );
+      }
     });
 
     listOfEventsArr = filteredlistOfEventsArr;
