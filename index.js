@@ -12,7 +12,7 @@ var groupArrays = [];
 
 var selectedCheckboxes = [];
 
-jQuery(document).ready(function ($) {
+jQuery(function($) {
   //Assign click event for Checkboxes
   const checkboxes = $('.checkbox');
   for (let checkbox of checkboxes) {
