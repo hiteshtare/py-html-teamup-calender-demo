@@ -65,8 +65,6 @@ function makeCorsRequest(url, successCallback, errorCallback) {
   // the DOM will be available here
   console.warn('On DOM ready');
 
-  showLoader();
-
   // function getMyCalenderEvents() {
   console.warn('getMyCalenderEvents');
   // Send a GET request for all events in a date range
@@ -85,12 +83,15 @@ function makeCorsRequest(url, successCallback, errorCallback) {
   //Only Todays events
   // const url = `https://api.teamup.com/${calendarKey}/events`;
 
+  showLoader();
+
   makeCorsRequest(
     url,
     function (xhr) {
       hideLoader();
       var response = JSON.parse(xhr.responseText);
       console.warn('Total no. of Events');
+      console.log(response);
 
       var listOfEvents = ``;
       var listOfEventsArr = [];
@@ -258,7 +259,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
       } //end of if if (response && response['events'])
 
       // Write Javascript code!
-      const appDiv = document.getElementById('app');
+      const appDiv = document.getElementById('mainContent');
       appDiv.innerHTML = listOfEvents;
     },
     function (xhr) {
@@ -269,6 +270,24 @@ function makeCorsRequest(url, successCallback, errorCallback) {
       );
     }
   );
+
+  var selectedCheckboxes = [];
+
+  const checkboxes = document.getElementsByClassName('checkbox');
+  for (let checkbox of checkboxes) {
+    checkbox.addEventListener('click', function ($event) {
+      var currentValue = $event.target.value;
+      var isChecked = $event.target.checked;
+
+      if (isChecked) {
+        selectedCheckboxes.push(currentValue);
+      } else {
+        var index = selectedCheckboxes.indexOf(currentValue);
+        selectedCheckboxes.splice(index, 1);
+      }
+      console.log(selectedCheckboxes.join(','));
+    });
+  }
 })(); //end of DOM ready
 
 function formatDate(date) {
@@ -290,4 +309,8 @@ function showLoader() {
 }
 function hideLoader() {
   if (divLoader) divLoader.style.display = 'none';
+}
+
+function handleClick(cb) {
+  alert('Clicked, new value = ' + cb.checked);
 }

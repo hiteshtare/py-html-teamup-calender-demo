@@ -1,30 +1,12 @@
-h1,
-h2 {
+body {
   font-family: Lato;
-}
-
-li {
-  font-family: Lato;
-  display: list-item;
-  text-align: -webkit-match-parent;
-  list-style-type: disc;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-inline-start: 40px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e0e0e0;
-  font-weight: 600;
 }
 
 h4 {
-  font-family: Lato;
   color: #4f4e49 !important;
 }
 
 .live-indicator-block .live-indicator {
-  font-family: Lato;
   background: #ea2429;
   color: #fff;
   padding: 5px;
@@ -109,4 +91,57 @@ h4 {
   border-radius: 50%;
   -webkit-animation: spin 0.8s linear infinite;
   animation: spin 0.8s linear infinite;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.left {
+  padding: 20px;
+  float: left;
+  width: 20%; /* The width is 20%, by default */
+}
+
+.left ul {
+  list-style-type: none;
+  margin-block-start: unset;
+  margin-block-end: unset;
+  margin-inline-start: unset;
+  margin-inline-end: unset;
+  padding-inline-start: 20px;
+}
+
+.main {
+  padding: 20px;
+  float: left;
+  width: 80%; /* The width is 80%, by default */
+}
+
+.main li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: 600;
+}
+
+/* Use a media query to add a break point at 800px: */
+@media screen and (max-width: 800px) {
+  .left {
+    display: none;
+  }
+  .main {
+    width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+  }
+}
+
+.chkLabel {
+  padding-left: 6px;
 }
