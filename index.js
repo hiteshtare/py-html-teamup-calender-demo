@@ -12,10 +12,36 @@ var groupArrays = [];
 
 var selectedCheckboxes = [];
 
-jQuery(function($) {
+//Jquery ready function
+jQuery(function ($) {
   //Assign click event for Checkboxes
   const checkboxes = $('.checkbox');
   for (let checkbox of checkboxes) {
+    $(checkbox).click(function ($event) {
+      var currentValue = +$event.target.value;
+      var isChecked = $event.target.checked;
+
+      if (isChecked) {
+        selectedCheckboxes.push(currentValue);
+      } else {
+        var index = selectedCheckboxes.indexOf(currentValue);
+        selectedCheckboxes.splice(index, 1);
+      }
+      console.warn(`Click: selectedCheckboxes`);
+      console.log(selectedCheckboxes.join(','));
+
+      var filteredHTML = getCuratedListOfEvents(true);
+
+      const appDiv = $('#mainContent');
+      if (appDiv.length !== 0) {
+        appDiv[0].innerHTML = filteredHTML;
+      }
+    });
+  }
+
+  //Assign click event for Checkboxes in Modal popup
+  const modalCheckboxes = $('.modalCheckbox');
+  for (let checkbox of modalCheckboxes) {
     $(checkbox).click(function ($event) {
       var currentValue = +$event.target.value;
       var isChecked = $event.target.checked;
@@ -57,12 +83,33 @@ jQuery(function($) {
     e.stopPropagation();
   };
 
+  //Change icon of Filter button based on checkboxes selected
   if (selectedCheckboxes.length != 0) {
     $('#filterContent').addClass('filters--active');
     $('#filter-button').addClass('button--highlight');
   } else {
     $('#filter-button').removeClass('button--highlight');
   }
+
+  // Get the modal
+  var modal = document.getElementById('myModal');
+
+  // When the user clicks the button, open the modal
+  $('#filter-button').click(function () {
+    $('#myModal').show();
+  });
+
+  // When the user clicks on <span> (x), close the modal
+  $('.close').click(function () {
+    $('#myModal').hide();
+  });
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      $('#myModal').hide();
+    }
+  };
 }); //end of jQuery(document).ready
 
 // Creates a CORS request in a cross-browser manner
@@ -287,6 +334,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
   );
 })(); //end of DOM ready
 
+//To format for group
 function formatDate(date) {
   var d = new Date(date),
     month = '' + (d.getMonth() + 1),
@@ -299,15 +347,19 @@ function formatDate(date) {
   return [year, month, day].join('-');
 }
 
+// To display loader animation
 function showLoader() {
   var divLoader = document.getElementById('divLoader');
 
   if (divLoader) divLoader.style.display = 'block';
 }
+
+// To hide loader animation
 function hideLoader() {
   if (divLoader) divLoader.style.display = 'none';
 }
 
+// To get curated List of Events based on filters checkboxes applied
 function getCuratedListOfEvents(isFilter = false) {
   let strHTML = '<ul>';
 

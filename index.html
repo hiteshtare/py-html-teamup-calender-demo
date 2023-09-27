@@ -34,31 +34,37 @@
     </fieldset>
   </div>
 
-  <button id="filter-button" class="filterButton">Filter</button>
-  <div id="filterContent" class="filters">
-        <ul class="checkboxList">
-          <li>
-            <input
-              type="checkbox"
-              class="checkbox"
-              id="cb1"
-              value="12582899"
-              checked="true"
-            /><label class="chkLabel" style="color: #2951b9" for="cb1"
-              >English</label
-            >
-          </li>
-          <li>
-            <input
-              type="checkbox"
-              class="checkbox"
-              id="cb2"
-              value="12582900"
-              checked="true"
-            /><label class="chkLabel" style="color: #b20d47" for="cb2"
-              >Hindi</label
-            >
-          </li>
-    </div>
+<!-- Trigger/Open The Modal -->
+<button id="filter-button" class="filterButton">Filters</button>
+  <!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+      <ul class="checkboxList">
+        <li>
+          <input
+            type="checkbox"
+            class="modalCheckbox"
+            id="modalcb1"
+            value="12582899"
+            checked="true"
+          /><label class="modalchkLabel" style="color: #2951b9" for="modalcb1"
+            >English</label
+          >
+        </li>
+        <li>
+          <input
+            type="checkbox"
+            class="modalCheckbox"
+            id="modalcb2"
+            value="12582900"
+            checked="true"
+          /><label class="modalchkLabel" style="color: #b20d47" for="modalcb2"
+            >Hindi</label
+          >
+        </li>
+  </div>
+</div>
   <div class="main" id="mainContent"></div>
 </body>
