@@ -63,7 +63,8 @@ jQuery(document).ready(function ($) {
   } else {
     $('#filter-button').removeClass('button--highlight');
   }
-});
+}); //end of jQuery(document).ready
+
 // Creates a CORS request in a cross-browser manner
 function createCORSRequest(method, url) {
   var apiKey =
