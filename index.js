@@ -1,6 +1,62 @@
 // Import stylesheets
 import './style.css';
+// Import stylesheets
+import './style.css';
 
+import jQuery from 'jquery';
+
+jQuery(document).ready(function ($) {
+  //Assign click event for Checkboxes
+  const checkboxes = document.getElementsByClassName('checkbox');
+  for (let checkbox of checkboxes) {
+    checkbox.addEventListener('click', function ($event) {
+      var currentValue = +$event.target.value;
+      var isChecked = $event.target.checked;
+
+      if (isChecked) {
+        selectedCheckboxes.push(currentValue);
+      } else {
+        var index = selectedCheckboxes.indexOf(currentValue);
+        selectedCheckboxes.splice(index, 1);
+      }
+      console.warn(`Click: selectedCheckboxes`);
+      console.log(selectedCheckboxes.join(','));
+
+      var filteredHTML = getCuratedListOfEvents(true);
+
+      // Write Javascript code!
+      const appDiv = document.getElementById('mainContent');
+      appDiv.innerHTML = filteredHTML;
+    });
+  }
+
+  //Assign click event for Filter button
+  var button = document.getElementById('filter-button');
+  var container = document.getElementById('filterContent');
+
+  button.onclick = function (e) {
+    e.stopPropagation();
+    if (container.classList.contains('filters--active')) {
+      container.classList.remove('filters--active');
+    } else {
+      container.classList.add('filters--active');
+    }
+  };
+
+  container.onclick = function (e) {
+    e.stopPropagation();
+  };
+
+  // window.onclick = function () {
+  //   container.classList.remove('filters--active');
+  // };
+
+  if (selectedCheckboxes.length != 0) {
+    button.classList.add('button--highlight');
+  } else {
+    button.classList.remove('button--highlight');
+  }
+});
 // Creates a CORS request in a cross-browser manner
 function createCORSRequest(method, url) {
   var apiKey =
@@ -228,56 +284,6 @@ var selectedCheckboxes = [];
       );
     }
   );
-
-  //Assign click event for Checkboxes
-  const checkboxes = document.getElementsByClassName('checkbox');
-  for (let checkbox of checkboxes) {
-    checkbox.addEventListener('click', function ($event) {
-      var currentValue = +$event.target.value;
-      var isChecked = $event.target.checked;
-
-      if (isChecked) {
-        selectedCheckboxes.push(currentValue);
-      } else {
-        var index = selectedCheckboxes.indexOf(currentValue);
-        selectedCheckboxes.splice(index, 1);
-      }
-      console.warn(`Click: selectedCheckboxes`);
-      console.log(selectedCheckboxes.join(','));
-
-      var filteredHTML = getCuratedListOfEvents(true);
-
-      // Write Javascript code!
-      const appDiv = document.getElementById('mainContent');
-      appDiv.innerHTML = filteredHTML;
-    });
-  }
-
-  var button = document.getElementById('filter-button');
-  var container = document.getElementById('filterContent');
-
-  button.onclick = function (e) {
-    e.stopPropagation();
-    if (container.classList.contains('filters--active')) {
-      container.classList.remove('filters--active');
-    } else {
-      container.classList.add('filters--active');
-    }
-  };
-
-  container.onclick = function (e) {
-    e.stopPropagation();
-  };
-
-  // window.onclick = function () {
-  //   container.classList.remove('filters--active');
-  // };
-
-  if (selectedCheckboxes.length != 0) {
-    button.classList.add('button--highlight');
-  } else {
-    button.classList.remove('button--highlight');
-  }
 })(); //end of DOM ready
 
 function formatDate(date) {
