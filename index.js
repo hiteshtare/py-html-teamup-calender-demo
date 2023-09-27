@@ -42,8 +42,6 @@ function makeCorsRequest(url, successCallback, errorCallback) {
     return;
   }
 
-  showLoader();
-
   // Response handlers.
   xhr.onload = function (xhr) {
     if (xhr.target.status < 400) {
@@ -66,6 +64,8 @@ function makeCorsRequest(url, successCallback, errorCallback) {
   // your page initialization code here
   // the DOM will be available here
   console.warn('On DOM ready');
+
+  showLoader();
 
   // function getMyCalenderEvents() {
   console.warn('getMyCalenderEvents');
