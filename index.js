@@ -59,6 +59,13 @@ function makeCorsRequest(url, successCallback, errorCallback) {
   xhr.send();
 }
 
+var listOfEvents = ``;
+var listOfEventsArr = [];
+var listOfEventsArrCopy = [];
+var groupArrays = [];
+
+var selectedCheckboxes = [];
+
 // self executing function here
 (function () {
   // your page initialization code here
@@ -93,15 +100,10 @@ function makeCorsRequest(url, successCallback, errorCallback) {
       console.warn('Total no. of Events');
       console.log(response);
 
-      var listOfEvents = ``;
-      var listOfEventsArr = [];
-      var groupArrays = [];
-
       if (response && response['events']) {
         if (response['events'].length !== 0) {
           console.log(response['events'].length);
 
-          listOfEvents = '<ul>';
           let parser = new DOMParser();
 
           response['events'].map((item) => {
@@ -188,9 +190,14 @@ function makeCorsRequest(url, successCallback, errorCallback) {
                 break;
             }
 
+            if (!selectedCheckboxes.includes(item.subcalendar_id)) {
+              selectedCheckboxes.push(item.subcalendar_id);
+            }
+
             listOfEventsArr.push({
               title: item.title,
               rawStartTime: item.start_dt,
+              subcalendar_id: item.subcalendar_id,
               startTimeStr: startTimeStr,
               endTimeStr: endTimeStr,
               calenderColor: calenderColor,
@@ -199,68 +206,19 @@ function makeCorsRequest(url, successCallback, errorCallback) {
             });
           }); //end of response['events'].map((item)
 
-          // this gives an object with dates as keys
-          const groups = listOfEventsArr.reduce((groups, game) => {
-            const rawStartDate = new Date(game.rawStartTime);
-            const date =
-              rawStartDate.getDate() +
-              ' ' +
-              rawStartDate.toLocaleString('default', { month: 'short' }) +
-              ' ' +
-              rawStartDate.getFullYear();
+          //Create clone of ListOfEvents for filtering
+          listOfEventsArrCopy = Object.assign([], listOfEventsArr);
 
-            if (!groups[date]) {
-              groups[date] = [];
-              groups[date]['startDate'] = new Date(rawStartDate).getDate();
-            }
-            groups[date].push(game);
-            return groups;
-          }, {});
-
-          // Edit: to add it in the array format instead
-          groupArrays = Object.keys(groups).map((date) => {
-            return {
-              date,
-              startDate: groups[date]['startDate'],
-              events: groups[date],
-            };
-          });
-
-          console.warn('groupArrays');
-          console.log(groupArrays);
-
-          groupArrays.forEach((group, index) => {
-            listOfEvents += `${
-              group.startDate === new Date().getDate()
-                ? `<h4><i>Today</i> — ${group.date}</h4>`
-                : `<h4> ${group.date}</h4>`
-            }`;
-
-            group.events.forEach((item) => {
-              const liStyle = `style="color:${item.calenderColor}"`;
-
-              const liveIndicatorBlock = `<span class="live-indicator-block">
-            <span class="live-indicator">
-            <span class="indicator online"></span>
-            <span style="padding: 2px;
-               vertical-align: top;">Live</span>
-            </span>
-            </span>`;
-              if (item.isCurrentTimeBetween) {
-                listOfEvents += `<li ${liStyle}> ${liveIndicatorBlock} <span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} <span class="spanStyle"> &ensp;|&ensp; ${item.zoomButtonLink}</span></li>`;
-              } else {
-                listOfEvents += `<li ${liStyle}><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} <span class="spanStyle"> &ensp;|&ensp; ${item.zoomButtonLink}</span></li>`;
-              }
-            });
-          });
-
-          listOfEvents += '</ul>';
+          listOfEvents += getCuratedListOfEvents();
         } //end of if (response['events'].length !== 0)
       } //end of if if (response && response['events'])
 
       // Write Javascript code!
       const appDiv = document.getElementById('mainContent');
       appDiv.innerHTML = listOfEvents;
+
+      console.warn(`On ready: selectedCheckboxes`);
+      console.log(selectedCheckboxes.join(','));
     },
     function (xhr) {
       hideLoader();
@@ -271,12 +229,11 @@ function makeCorsRequest(url, successCallback, errorCallback) {
     }
   );
 
-  var selectedCheckboxes = [];
-
+  //Assign click event for Checkboxes
   const checkboxes = document.getElementsByClassName('checkbox');
   for (let checkbox of checkboxes) {
     checkbox.addEventListener('click', function ($event) {
-      var currentValue = $event.target.value;
+      var currentValue = +$event.target.value;
       var isChecked = $event.target.checked;
 
       if (isChecked) {
@@ -285,7 +242,14 @@ function makeCorsRequest(url, successCallback, errorCallback) {
         var index = selectedCheckboxes.indexOf(currentValue);
         selectedCheckboxes.splice(index, 1);
       }
+      console.warn(`Click: selectedCheckboxes`);
       console.log(selectedCheckboxes.join(','));
+
+      var filteredHTML = getCuratedListOfEvents(true);
+
+      // Write Javascript code!
+      const appDiv = document.getElementById('mainContent');
+      appDiv.innerHTML = filteredHTML;
     });
   }
 })(); //end of DOM ready
@@ -311,6 +275,81 @@ function hideLoader() {
   if (divLoader) divLoader.style.display = 'none';
 }
 
-function handleClick(cb) {
-  alert('Clicked, new value = ' + cb.checked);
+function getCuratedListOfEvents(isFilter = false) {
+  let strHTML = '<ul>';
+
+  if (isFilter) {
+    let filteredlistOfEventsArr = [];
+    listOfEventsArr = listOfEventsArrCopy;
+
+    selectedCheckboxes.forEach((selectedCheckbox) => {
+      filteredlistOfEventsArr = listOfEventsArr.filter((item) => {
+        return item.subcalendar_id == selectedCheckbox;
+      });
+    });
+
+    listOfEventsArr = filteredlistOfEventsArr;
+
+    console.warn(`listOfEventsArr`);
+    console.log(listOfEventsArr);
+  }
+
+  // this gives an object with dates as keys
+  const groups = listOfEventsArr.reduce((groups, game) => {
+    const rawStartDate = new Date(game.rawStartTime);
+    const date =
+      rawStartDate.getDate() +
+      ' ' +
+      rawStartDate.toLocaleString('default', { month: 'short' }) +
+      ' ' +
+      rawStartDate.getFullYear();
+
+    if (!groups[date]) {
+      groups[date] = [];
+      groups[date]['startDate'] = new Date(rawStartDate).getDate();
+    }
+    groups[date].push(game);
+    return groups;
+  }, {});
+
+  // Edit: to add it in the array format instead
+  groupArrays = Object.keys(groups).map((date) => {
+    return {
+      date,
+      startDate: groups[date]['startDate'],
+      events: groups[date],
+    };
+  });
+
+  console.warn('groupArrays');
+  console.log(groupArrays);
+
+  groupArrays.forEach((group, index) => {
+    strHTML += `${
+      group.startDate === new Date().getDate()
+        ? `<h4><i>Today</i> — ${group.date}</h4>`
+        : `<h4> ${group.date}</h4>`
+    }`;
+
+    group.events.forEach((item) => {
+      const liStyle = `style="color:${item.calenderColor}"`;
+
+      const liveIndicatorBlock = `<span class="live-indicator-block">
+    <span class="live-indicator">
+    <span class="indicator online"></span>
+    <span style="padding: 2px;
+       vertical-align: top;">Live</span>
+    </span>
+    </span>`;
+      if (item.isCurrentTimeBetween) {
+        strHTML += `<li ${liStyle}> ${liveIndicatorBlock} <span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} <span class="spanStyle"> &ensp;|&ensp; ${item.zoomButtonLink}</span></li>`;
+      } else {
+        strHTML += `<li ${liStyle}><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} <span class="spanStyle"> &ensp;|&ensp; ${item.zoomButtonLink}</span></li>`;
+      }
+    });
+  });
+
+  strHTML += '</ul>';
+
+  return strHTML;
 }
