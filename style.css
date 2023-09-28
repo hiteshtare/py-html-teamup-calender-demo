@@ -240,7 +240,7 @@ input[type='checkbox'] {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 99; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
@@ -297,6 +297,10 @@ input[type='checkbox'] {
   width: 80%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+
+.modal-header-details h2 {
+  color: white;
 }
 
 /* Modal Content */
