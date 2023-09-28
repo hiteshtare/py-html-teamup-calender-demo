@@ -138,7 +138,7 @@ fieldset {
 }
 
 ul {
-  padding: unset;
+  padding: unset !important;
 }
 
 .main p {
