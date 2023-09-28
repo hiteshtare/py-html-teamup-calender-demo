@@ -138,7 +138,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
   const currentDate = new Date();
   const startDateParam = formatDate(currentDate);
   const endDateParam = formatDate(
-    currentDate.setDate(currentDate.getDate() + 10)
+    currentDate.setDate(currentDate.getDate() + 3)
   );
 
   //Passing Date range for events
