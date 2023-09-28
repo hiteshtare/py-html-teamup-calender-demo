@@ -340,7 +340,7 @@ input[type='checkbox'] {
   cursor: pointer;
 }
 
-.zoomButtonLink {
+.joinButtonLink {
   background-color: #052956;
   cursor: pointer;
   padding: 10px;
@@ -348,7 +348,7 @@ input[type='checkbox'] {
   text-decoration: none;
 }
 
-.zoomButtonLink:hover,
-.zoomButtonLink:focus {
+.joinButtonLink:hover,
+.joinButtonLink:focus {
   background-color: #2e6da4;
 }
