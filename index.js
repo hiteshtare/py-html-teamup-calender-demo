@@ -156,6 +156,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
       var response = JSON.parse(xhr.responseText);
       console.warn('Total no. of Events');
       console.log(response);
+      debugger;
 
       if (response && response['events']) {
         if (response['events'].length !== 0) {
@@ -239,11 +240,14 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
             if (hasEndTimeOfEventAfterCurrentTime) return;
 
-            let calenderColor = '#283842';
+            let calenderColor = '#2951B9';
             let calenderLabel = 'English Meditations';
 
+            const validCalenersArr = [
+              9551817, 9613432, 7897161, 9533536, 11986948,
+            ];
+
             switch (item.subcalendar_id) {
-              case 9164129:
               case 9551817:
                 calenderColor = '#2951B9';
                 calenderLabel = 'English Meditations';
@@ -259,28 +263,45 @@ function makeCorsRequest(url, successCallback, errorCallback) {
                 calenderLabel = 'Sannyasi-led Events';
                 break;
 
+              case 9533536:
+                calenderColor = '#176413';
+                calenderLabel = 'Indian Language Meditations';
+                break;
+
+              case 11986948:
+                calenderColor = '#B84E9D';
+                calenderLabel = 'Study Groups in English & Indian Languages';
+                break;
+
               default:
                 break;
             }
 
+            //To check if selectedCheckboxes does not have subcalendar_id to avoid duplicates
             if (!selectedCheckboxes.includes(item.subcalendar_id)) {
-              selectedCheckboxes.push(item.subcalendar_id);
+              //To check if subcalendar_id matches with Valid Calender configured
+              if (validCalenersArr.includes(item.subcalendar_id)) {
+                selectedCheckboxes.push(item.subcalendar_id);
+              }
             }
 
-            listOfEventsArr.push({
-              id: index,
-              title: item.title,
-              rawStartTime: item.start_dt,
-              subcalendar_id: item.subcalendar_id,
-              startTimeStr: startTimeStr,
-              endTimeStr: endTimeStr,
-              calenderLabel: calenderLabel,
-              calenderColor: calenderColor,
-              zoomButtonLink: zoomButtonLink,
-              youtubeButtonLink: youtubeButtonLink,
-              isCurrentTimeBetween: isCurrentTimeBetween,
-              modalContent: modalContent,
-            });
+            //To check if subcalendar_id matches with Valid Calender configured then push in listOfEventsArr
+            if (validCalenersArr.includes(item.subcalendar_id)) {
+              listOfEventsArr.push({
+                id: index,
+                title: item.title,
+                rawStartTime: item.start_dt,
+                subcalendar_id: item.subcalendar_id,
+                startTimeStr: startTimeStr,
+                endTimeStr: endTimeStr,
+                calenderLabel: calenderLabel,
+                calenderColor: calenderColor,
+                zoomButtonLink: zoomButtonLink,
+                youtubeButtonLink: youtubeButtonLink,
+                isCurrentTimeBetween: isCurrentTimeBetween,
+                modalContent: modalContent,
+              });
+            }
           }); //end of response['events'].map((item)
 
           //Create clone of ListOfEvents for filtering
@@ -531,11 +552,10 @@ function getFilters(className = '') {
   let strHTML = '<ul class="checkboxList">';
 
   selectedCheckboxes.forEach((selectedCheckbox, index) => {
-    let checkboxColor = '#283842';
+    let checkboxColor = '#2951B9';
     let checkboxLabel = 'English Meditations';
 
     switch (selectedCheckbox) {
-      case 9164129:
       case 9551817:
         checkboxColor = '#2951B9';
         checkboxLabel = 'English Meditations';
@@ -549,6 +569,16 @@ function getFilters(className = '') {
       case 7897161:
         checkboxColor = '#CA7609';
         checkboxLabel = 'Sannyasi-led Events';
+        break;
+
+      case 9533536:
+        checkboxColor = '#176413';
+        checkboxLabel = 'Indian Language Meditations';
+        break;
+
+      case 11986948:
+        checkboxColor = '#B84E9D';
+        checkboxLabel = 'Study Groups in English & Indian Languages';
         break;
 
       default:
