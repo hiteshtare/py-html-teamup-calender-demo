@@ -156,7 +156,6 @@ function makeCorsRequest(url, successCallback, errorCallback) {
       var response = JSON.parse(xhr.responseText);
       console.warn('Total no. of Events');
       console.log(response);
-      debugger;
 
       if (response && response['events']) {
         if (response['events'].length !== 0) {
@@ -506,7 +505,11 @@ function getCuratedListOfEvents(isFilter = false) {
 
       let buttonLinks = '';
       const zoomButtonLinkHTML = item.zoomButtonLink
-        ? `<a href=${item.zoomButtonLink}>Zoom link</a>`
+        ? `<a href=${item.zoomButtonLink} target="_blank" rel="nofollow" class="zoomButtonLink">
+        <span>
+        <i aria-hidden="true" class="fas fa-video" style="color: #fff;"></i> </span>
+        <span style="color: #fff;">Join via Zoom</span>
+        </a>`
         : '';
 
       if (zoomButtonLinkHTML) {

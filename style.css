@@ -144,7 +144,7 @@ ul {
 
 .main p {
   margin: unset;
-  margin-bottom: unset;
+  margin-bottom: 10px;
 }
 
 .filters {
@@ -338,4 +338,17 @@ input[type='checkbox'] {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+.zoomButtonLink {
+  background-color: #052956;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.zoomButtonLink:hover,
+.zoomButtonLink:focus {
+  background-color: #2e6da4;
 }
