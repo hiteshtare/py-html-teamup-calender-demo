@@ -113,7 +113,6 @@ h4 {
 }
 
 .main {
-  padding: 20px;
   float: left;
   width: 70%; /* The width is 80%, by default */
 }
@@ -121,12 +120,13 @@ h4 {
 .main li {
   display: list-item;
   text-align: -webkit-match-parent;
-  /* list-style-type: none; */
-  margin: 1em;
-  padding-inline-start: 20px;
-  padding-inline-end: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  list-style-type: none;
+  /* margin-top: 1em; */
+  margin-bottom: 10px;
+  padding-inline-start: 10px;
+  padding-inline-end: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border: 1px solid #e0e0e0;
   font-weight: 600;
   border-radius: 5px;
@@ -135,6 +135,10 @@ h4 {
 fieldset {
   border: 1px solid #e0e0e0;
   border-radius: 5px;
+}
+
+ul {
+  padding: unset;
 }
 
 .main p {
