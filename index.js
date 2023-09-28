@@ -1,7 +1,5 @@
 // Import stylesheets
 import './style.css';
-// Import stylesheets
-import './style.css';
 
 // declate Jquery variable
 import jQuery from 'jquery';
