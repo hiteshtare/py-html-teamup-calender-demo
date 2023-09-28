@@ -362,6 +362,22 @@ function makeCorsRequest(url, successCallback, errorCallback) {
           }
         });
       }
+      //Assign click event for Checkboxes in Modal popup
+
+      // When the user clicks the button, open the modal
+      $('p.title').click(function ($event) {
+        const id = $event.target.id;
+        const foundModalContent = listOfEventsArr.find(
+          (x) => x.id == id
+        ).modalContent;
+
+        const modalContentDetails = document.getElementById(
+          'modalContentDetails'
+        );
+        modalContentDetails.innerHTML = foundModalContent;
+        $('#modalDetails').show();
+      });
+      // When the user clicks the button, open the modal
     },
     function (xhr) {
       hideLoader();
