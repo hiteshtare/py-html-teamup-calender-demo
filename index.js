@@ -230,16 +230,22 @@ function makeCorsRequest(url, successCallback, errorCallback) {
             if (hasEndTimeOfEventAfterCurrentTime) return;
 
             let calenderColor = '#283842';
+            let calenderLabel = 'English Meditations';
 
             switch (item.subcalendar_id) {
               case 12582899:
                 calenderColor = '#2951B9';
+                calenderLabel = 'English Meditations';
+
                 break;
               case 12582900:
                 calenderColor = '#B20D47';
+                calenderLabel = 'Hindi Meditations';
+
                 break;
               case 12582894:
                 calenderColor = '#CA7609';
+                calenderLabel = 'Sannyasi-led Events';
                 break;
 
               default:
@@ -256,6 +262,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
               subcalendar_id: item.subcalendar_id,
               startTimeStr: startTimeStr,
               endTimeStr: endTimeStr,
+              calenderLabel: calenderLabel,
               calenderColor: calenderColor,
               zoomButtonLink: zoomButtonLink,
               isCurrentTimeBetween: isCurrentTimeBetween,
@@ -442,7 +449,7 @@ function getCuratedListOfEvents(isFilter = false) {
     }`;
 
     group.events.forEach((item) => {
-      const liStyle = `style="color:${item.calenderColor}"`;
+      const calenderStyle = `style="color:${item.calenderColor}"`;
 
       const liveIndicatorBlock = `<span class="live-indicator-block">
     <span class="live-indicator">
@@ -452,9 +459,15 @@ function getCuratedListOfEvents(isFilter = false) {
     </span>
     </span>`;
       if (item.isCurrentTimeBetween) {
-        strHTML += `<li ${liStyle}> ${liveIndicatorBlock} <span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} <span class="spanStyle"> &ensp;|&ensp; ${item.zoomButtonLink}</span></li>`;
+        strHTML += `<li> 
+         <p ${calenderStyle}> ${liveIndicatorBlock} ${item.calenderLabel}</p>
+         <p>${item.title}</p>
+         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp;|&ensp; <span class="spanStyle">${item.zoomButtonLink}</span></p></li>`;
       } else {
-        strHTML += `<li ${liStyle}><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &emsp; ${item.title} <span class="spanStyle"> &ensp;|&ensp; ${item.zoomButtonLink}</span></li>`;
+        strHTML += `<li>
+         <p ${calenderStyle}>${item.calenderLabel}</p>
+         <p>${item.title}</p>
+         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp;|&ensp; <span class="spanStyle">${item.zoomButtonLink}</span></p></li>`;
       }
     });
   });
