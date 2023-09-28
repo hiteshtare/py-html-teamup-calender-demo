@@ -133,7 +133,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
   console.warn('getMyCalenderEvents');
   // Send a GET request for all events in a date range
 
-  var calendarKey = 'ks91nc4hq4vimq69g2';
+  var calendarKey = 'ks8ftmzv9zw938fxfk';
 
   const currentDate = new Date();
   const startDateParam = formatDate(currentDate);
@@ -165,15 +165,23 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
           response['events'].map((item, index) => {
             ////////////////Create Zoom button link////////////////
-            var htmlDoc = parser.parseFromString(item.notes, 'text/html');
-            var zoomButtonLink = '';
+            var htmlNotes = parser.parseFromString(item.notes, 'text/html');
             var modalContent = '';
 
-            if (htmlDoc && htmlDoc.getElementsByTagName('p')) {
-              zoomButtonLink = htmlDoc.getElementsByTagName('p')[0].innerHTML;
-              modalContent = htmlDoc.getElementsByTagName('body')[0].innerHTML;
-              // console.warn('zoomButtonLink');
-              // console.log(zoomButtonLink);
+            if (htmlNotes) {
+              modalContent =
+                htmlNotes.getElementsByTagName('body')[0].innerHTML;
+            }
+
+            var zoomButtonLink = '';
+            var youtubeButtonLink = '';
+            if (item.custom) {
+              if (item.custom.zoom_link) {
+                zoomButtonLink = item.custom.zoom_link;
+              }
+              if (item.custom.youtube_link) {
+                youtubeButtonLink = item.custom.zoom_link;
+              }
             }
             ////////////////Create Zoom button link////////////////
 
@@ -235,17 +243,18 @@ function makeCorsRequest(url, successCallback, errorCallback) {
             let calenderLabel = 'English Meditations';
 
             switch (item.subcalendar_id) {
-              case 12582899:
+              case 9164129:
+              case 9551817:
                 calenderColor = '#2951B9';
                 calenderLabel = 'English Meditations';
-
                 break;
-              case 12582900:
+
+              case 9613432:
                 calenderColor = '#B20D47';
                 calenderLabel = 'Hindi Meditations';
-
                 break;
-              case 12582894:
+
+              case 7897161:
                 calenderColor = '#CA7609';
                 calenderLabel = 'Sannyasi-led Events';
                 break;
@@ -268,6 +277,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
               calenderLabel: calenderLabel,
               calenderColor: calenderColor,
               zoomButtonLink: zoomButtonLink,
+              youtubeButtonLink: youtubeButtonLink,
               isCurrentTimeBetween: isCurrentTimeBetween,
               modalContent: modalContent,
             });
@@ -508,17 +518,18 @@ function getFilters(className = '') {
     let checkboxLabel = 'English Meditations';
 
     switch (selectedCheckbox) {
-      case 12582899:
+      case 9164129:
+      case 9551817:
         checkboxColor = '#2951B9';
         checkboxLabel = 'English Meditations';
-
         break;
-      case 12582900:
+
+      case 9613432:
         checkboxColor = '#B20D47';
         checkboxLabel = 'Hindi Meditations';
-
         break;
-      case 12582894:
+
+      case 7897161:
         checkboxColor = '#CA7609';
         checkboxLabel = 'Sannyasi-led Events';
         break;
