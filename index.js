@@ -3,7 +3,9 @@ import './style.css';
 // Import stylesheets
 import './style.css';
 
+// declate Jquery variable
 import jQuery from 'jquery';
+var $ = jQuery;
 
 var listOfEvents = ``;
 var listOfEventsArr = [];
@@ -11,59 +13,8 @@ var listOfEventsArrCopy = [];
 var groupArrays = [];
 
 var selectedCheckboxes = [];
-
 //Jquery ready function
 jQuery(function ($) {
-  //Assign click event for Checkboxes
-  const checkboxes = $('.checkbox');
-  for (let checkbox of checkboxes) {
-    $(checkbox).click(function ($event) {
-      var currentValue = +$event.target.value;
-      var isChecked = $event.target.checked;
-
-      if (isChecked) {
-        selectedCheckboxes.push(currentValue);
-      } else {
-        var index = selectedCheckboxes.indexOf(currentValue);
-        selectedCheckboxes.splice(index, 1);
-      }
-      console.warn(`Click: selectedCheckboxes`);
-      console.log(selectedCheckboxes.join(','));
-
-      var filteredHTML = getCuratedListOfEvents(true);
-
-      const appDiv = $('#mainContent');
-      if (appDiv.length !== 0) {
-        appDiv[0].innerHTML = filteredHTML;
-      }
-    });
-  }
-
-  //Assign click event for Checkboxes in Modal popup
-  const modalCheckboxes = $('.modalCheckbox');
-  for (let checkbox of modalCheckboxes) {
-    $(checkbox).click(function ($event) {
-      var currentValue = +$event.target.value;
-      var isChecked = $event.target.checked;
-
-      if (isChecked) {
-        selectedCheckboxes.push(currentValue);
-      } else {
-        var index = selectedCheckboxes.indexOf(currentValue);
-        selectedCheckboxes.splice(index, 1);
-      }
-      console.warn(`Click: selectedCheckboxes`);
-      console.log(selectedCheckboxes.join(','));
-
-      var filteredHTML = getCuratedListOfEvents(true);
-
-      const appDiv = $('#mainContent');
-      if (appDiv.length !== 0) {
-        appDiv[0].innerHTML = filteredHTML;
-      }
-    });
-  }
-
   //Assign click event for Filter button
   var container = $('#filterContent');
 
@@ -171,6 +122,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 }
 
 // self executing function here
+
 (function () {
   // your page initialization code here
   // the DOM will be available here
@@ -321,8 +273,68 @@ function makeCorsRequest(url, successCallback, errorCallback) {
       const appDiv = document.getElementById('mainContent');
       appDiv.innerHTML = listOfEvents;
 
+      // Create filter list on the fly
+      const ulcheckboxList = document.getElementById('ulcheckboxList');
+      ulcheckboxList.innerHTML = getFilters();
+
       console.warn(`On ready: selectedCheckboxes`);
       console.log(selectedCheckboxes.join(','));
+
+      //Assign click event for Checkboxes
+      const checkboxes = $('.checkbox');
+      for (let checkbox of checkboxes) {
+        $(checkbox).click(function ($event) {
+          var currentValue = +$event.target.value;
+          var isChecked = $event.target.checked;
+
+          if (isChecked) {
+            selectedCheckboxes.push(currentValue);
+          } else {
+            var index = selectedCheckboxes.indexOf(currentValue);
+            selectedCheckboxes.splice(index, 1);
+          }
+          console.warn(`Click: selectedCheckboxes`);
+          console.log(selectedCheckboxes.join(','));
+
+          var filteredHTML = getCuratedListOfEvents(true);
+
+          const appDiv = $('#mainContent');
+          if (appDiv.length !== 0) {
+            appDiv[0].innerHTML = filteredHTML;
+          }
+        });
+      }
+
+      // Create filter list on the fly for Modal popup
+      const ulcheckboxListModal = document.getElementById(
+        'ulcheckboxListModal'
+      );
+      ulcheckboxListModal.innerHTML = getFilters('modal');
+
+      //Assign click event for Checkboxes in Modal popup
+      const modalCheckboxes = $('.modalcheckbox');
+      for (let checkbox of modalCheckboxes) {
+        $(checkbox).click(function ($event) {
+          var currentValue = +$event.target.value;
+          var isChecked = $event.target.checked;
+
+          if (isChecked) {
+            selectedCheckboxes.push(currentValue);
+          } else {
+            var index = selectedCheckboxes.indexOf(currentValue);
+            selectedCheckboxes.splice(index, 1);
+          }
+          console.warn(`Click: selectedCheckboxes`);
+          console.log(selectedCheckboxes.join(','));
+
+          var filteredHTML = getCuratedListOfEvents(true);
+
+          const appDiv = $('#mainContent');
+          if (appDiv.length !== 0) {
+            appDiv[0].innerHTML = filteredHTML;
+          }
+        });
+      }
     },
     function (xhr) {
       hideLoader();
@@ -457,5 +469,50 @@ function getCuratedListOfEvents(isFilter = false) {
     button.classList.remove('button--highlight');
   }
 
+  return strHTML;
+}
+
+// To get curated List of Events based on filters checkboxes applied
+function getFilters(className = '') {
+  let strHTML = '<ul class="checkboxList">';
+
+  selectedCheckboxes.forEach((selectedCheckbox, index) => {
+    let checkboxColor = '#283842';
+    let checkboxLabel = 'English Meditations';
+
+    switch (selectedCheckbox) {
+      case 12582899:
+        checkboxColor = '#2951B9';
+        checkboxLabel = 'English Meditations';
+
+        break;
+      case 12582900:
+        checkboxColor = '#B20D47';
+        checkboxLabel = 'Hindi Meditations';
+
+        break;
+      case 12582894:
+        checkboxColor = '#CA7609';
+        checkboxLabel = 'Sannyasi-led Events';
+        break;
+
+      default:
+        break;
+    }
+
+    strHTML += `<li>
+          <input
+            type="checkbox"
+            class="${className}checkbox"
+            id="${className}cb${index}"
+            value="${selectedCheckbox}"
+            checked="true"
+          /><label class="${className}chkLabel"  for="${className}cb${index}"
+          style="color: ${checkboxColor}" >${checkboxLabel}</label
+          >
+        </li>`;
+  });
+
+  strHTML += '</ul>';
   return strHTML;
 }
