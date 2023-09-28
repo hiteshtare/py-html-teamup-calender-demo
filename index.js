@@ -383,6 +383,10 @@ function getCuratedListOfEvents(isFilter = false) {
 
     listOfEventsArr = filteredlistOfEventsArr;
 
+    //Sort the array by Date
+    listOfEventsArr = listOfEventsArr.sort(function (a, b) {
+      return new Date(a.rawStartTime) - new Date(b.rawStartTime);
+    });
     console.warn(`listOfEventsArr`);
     console.log(listOfEventsArr);
   }
