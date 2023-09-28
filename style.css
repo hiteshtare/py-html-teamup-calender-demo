@@ -288,6 +288,10 @@ input[type='checkbox'] {
   border-top-right-radius: 5px;
 }
 
+.modal-header h2 {
+  color: white;
+}
+
 /* Modal header for Details */
 .modal-header-details {
   padding: 2px 16px;
