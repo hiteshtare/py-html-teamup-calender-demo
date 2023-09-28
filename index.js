@@ -313,24 +313,15 @@ function makeCorsRequest(url, successCallback, errorCallback) {
           if (appDiv.length !== 0) {
             appDiv[0].innerHTML = filteredHTML;
           }
+
+          // When the user clicks the button, open the modal
+          assignClickForModal();
         });
       }
       //Assign click event for Checkboxes
 
       // When the user clicks the button, open the modal
-      $('p.title').click(function ($event) {
-        const id = $event.target.id;
-        const foundModalContent = listOfEventsArr.find(
-          (x) => x.id == id
-        ).modalContent;
-
-        const modalContentDetails = document.getElementById(
-          'modalContentDetails'
-        );
-        modalContentDetails.innerHTML = foundModalContent;
-        $('#modalDetails').show();
-      });
-      // When the user clicks the button, open the modal
+      assignClickForModal();
 
       // Create filter list on the fly for Modal popup
       const ulcheckboxListModal = document.getElementById(
@@ -360,6 +351,9 @@ function makeCorsRequest(url, successCallback, errorCallback) {
           if (appDiv.length !== 0) {
             appDiv[0].innerHTML = filteredHTML;
           }
+
+          // When the user clicks the button, open the modal
+          assignClickForModal();
         });
       }
     },
@@ -548,4 +542,17 @@ function getFilters(className = '') {
 
   strHTML += '</ul>';
   return strHTML;
+}
+
+function assignClickForModal() {
+  $('p.title').click(function ($event) {
+    const id = $event.target.id;
+    const foundModalContent = listOfEventsArr.find(
+      (x) => x.id == id
+    ).modalContent;
+
+    const modalContentDetails = document.getElementById('modalContentDetails');
+    modalContentDetails.innerHTML = foundModalContent;
+    $('#modalDetails').show();
+  });
 }
