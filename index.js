@@ -43,22 +43,25 @@ jQuery(function ($) {
   }
 
   // Get the modal
-  var modal = document.getElementById('myModal');
+  var modalFilter = document.getElementById('modalFilter');
+  var modalDetails = document.getElementById('modalDetails');
 
   // When the user clicks the button, open the modal
   $('#filter-button').click(function () {
-    $('#myModal').show();
+    $('#modalFilter').show();
   });
 
   // When the user clicks on <span> (x), close the modal
   $('.close').click(function () {
-    $('#myModal').hide();
+    $('#modalFilter').hide();
+    $('#modalDetails').hide();
   });
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
-    if (event.target == modal) {
-      $('#myModal').hide();
+    if (event.target == modalFilter || event.target == modalDetails) {
+      $('#modalFilter').hide();
+      $('#modalDetails').hide();
     }
   };
 }); //end of jQuery(document).ready
@@ -162,14 +165,15 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
           let parser = new DOMParser();
 
-          response['events'].map((item) => {
+          response['events'].map((item, index) => {
             ////////////////Create Zoom button link////////////////
             var htmlDoc = parser.parseFromString(item.notes, 'text/html');
             var zoomButtonLink = '';
+            var modalContent = '';
 
             if (htmlDoc && htmlDoc.getElementsByTagName('p')) {
               zoomButtonLink = htmlDoc.getElementsByTagName('p')[0].innerHTML;
-
+              modalContent = htmlDoc.getElementsByTagName('body')[0].innerHTML;
               // console.warn('zoomButtonLink');
               // console.log(zoomButtonLink);
             }
@@ -257,6 +261,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
             }
 
             listOfEventsArr.push({
+              id: index,
               title: item.title,
               rawStartTime: item.start_dt,
               subcalendar_id: item.subcalendar_id,
@@ -266,6 +271,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
               calenderColor: calenderColor,
               zoomButtonLink: zoomButtonLink,
               isCurrentTimeBetween: isCurrentTimeBetween,
+              modalContent: modalContent,
             });
           }); //end of response['events'].map((item)
 
@@ -311,6 +317,22 @@ function makeCorsRequest(url, successCallback, errorCallback) {
           }
         });
       }
+      //Assign click event for Checkboxes
+
+      // When the user clicks the button, open the modal
+      $('p.title').click(function ($event) {
+        const id = $event.target.id;
+        const foundModalContent = listOfEventsArr.find(
+          (x) => x.id == id
+        ).modalContent;
+
+        const modalContentDetails = document.getElementById(
+          'modalContentDetails'
+        );
+        modalContentDetails.innerHTML = foundModalContent;
+        $('#modalDetails').show();
+      });
+      // When the user clicks the button, open the modal
 
       // Create filter list on the fly for Modal popup
       const ulcheckboxListModal = document.getElementById(
@@ -461,12 +483,12 @@ function getCuratedListOfEvents(isFilter = false) {
       if (item.isCurrentTimeBetween) {
         strHTML += `<li> 
          <p ${calenderStyle}> ${liveIndicatorBlock} ${item.calenderLabel}</p>
-         <p>${item.title}</p>
+         <p id="${item.id}" class="title">${item.title}</p>
          <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp;|&ensp; <span class="spanStyle">${item.zoomButtonLink}</span></p></li>`;
       } else {
         strHTML += `<li>
          <p ${calenderStyle}>${item.calenderLabel}</p>
-         <p>${item.title}</p>
+         <p id="${item.id}" class="title">${item.title}</p>
          <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp;|&ensp; <span class="spanStyle">${item.zoomButtonLink}</span></p></li>`;
       }
     });

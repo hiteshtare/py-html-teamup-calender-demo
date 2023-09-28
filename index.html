@@ -14,12 +14,28 @@
   <!-- Trigger/Open The Modal -->
   <button id="filter-button" class="filterButton">Filters</button>
   <!-- The Modal -->
-  <div id="myModal" class="modal">
+  <div id="modalFilter" class="modal">
+    <!-- Modal header -->
+    <div class="modal-header">
+      <h2>Filters <span class="close">&times;</span></h2>
+    </div>
     <!-- Modal content -->
     <div class="modal-content">
-      <span class="close">&times;</span>
       <ul id="ulcheckboxListModal" class="checkboxList"></ul>
     </div>
   </div>
+
+  <!-- The Modal -->
+  <div id="modalDetails" class="modal">
+    <!-- Modal header -->
+    <div class="modal-header-details">
+      <h2>Details <span class="close">&times;</span></h2>
+    </div>
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div id="modalContentDetails"></div>
+    </div>
+  </div>
+
   <div class="main" id="mainContent"></div>
 </body>
