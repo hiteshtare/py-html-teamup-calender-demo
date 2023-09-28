@@ -138,7 +138,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
   const currentDate = new Date();
   const startDateParam = formatDate(currentDate);
   const endDateParam = formatDate(
-    currentDate.setDate(currentDate.getDate() + 1)
+    currentDate.setDate(currentDate.getDate() + 10)
   );
 
   //Passing Date range for events
@@ -527,12 +527,12 @@ function getCuratedListOfEvents(isFilter = false) {
         strHTML += `<li> 
          <p ${calenderStyle}> ${liveIndicatorBlock} ${item.calenderLabel}</p>
          <p id="${item.id}" class="title">${item.title}</p>
-         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp;|&ensp; <span class="spanStyle"> ${buttonLinks} </span></p></li>`;
+         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp; <span class="spanStyle"> ${buttonLinks} </span></p></li>`;
       } else {
         strHTML += `<li>
          <p ${calenderStyle}>${item.calenderLabel}</p>
          <p id="${item.id}" class="title">${item.title}</p>
-         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp;|&ensp; <span class="spanStyle"> ${buttonLinks} </span></p></li>`;
+         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp; <span class="spanStyle"> ${buttonLinks} </span></p></li>`;
       }
     });
   });
