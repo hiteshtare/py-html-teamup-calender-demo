@@ -180,7 +180,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
                 zoomButtonLink = item.custom.zoom_link;
               }
               if (item.custom.youtube_link) {
-                youtubeButtonLink = item.custom.zoom_link;
+                youtubeButtonLink = item.custom.youtube_link;
               }
             }
             ////////////////Create Zoom button link////////////////
@@ -482,16 +482,33 @@ function getCuratedListOfEvents(isFilter = false) {
        vertical-align: top;">Live</span>
     </span>
     </span>`;
+
+      let buttonLinks = '';
+      const zoomButtonLinkHTML = item.zoomButtonLink
+        ? `<a href=${item.zoomButtonLink}>Zoom link</a>`
+        : '';
+
+      if (zoomButtonLinkHTML) {
+        buttonLinks = zoomButtonLinkHTML;
+      }
+      const youtubeButtonLinkHTML = item.youtubeButtonLink
+        ? `<a href=${item.youtubeButtonLink}>Youtube</a>`
+        : '';
+
+      if (youtubeButtonLinkHTML) {
+        buttonLinks += ` | ` + youtubeButtonLinkHTML;
+      }
+
       if (item.isCurrentTimeBetween) {
         strHTML += `<li> 
          <p ${calenderStyle}> ${liveIndicatorBlock} ${item.calenderLabel}</p>
          <p id="${item.id}" class="title">${item.title}</p>
-         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp;|&ensp; <span class="spanStyle">${item.zoomButtonLink}</span></p></li>`;
+         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp;|&ensp; <span class="spanStyle"> ${buttonLinks} </span></p></li>`;
       } else {
         strHTML += `<li>
          <p ${calenderStyle}>${item.calenderLabel}</p>
          <p id="${item.id}" class="title">${item.title}</p>
-         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp;|&ensp; <span class="spanStyle">${item.zoomButtonLink}</span></p></li>`;
+         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp;|&ensp; <span class="spanStyle"> ${buttonLinks} </span></p></li>`;
       }
     });
   });
