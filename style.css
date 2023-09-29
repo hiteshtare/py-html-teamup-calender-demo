@@ -290,7 +290,8 @@ input[type='checkbox'] {
 
 .modal-header h2 {
   color: white;
-  font-size: 24px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 /* Modal header for Details */
@@ -352,4 +353,8 @@ input[type='checkbox'] {
 .joinButtonLink:hover,
 .joinButtonLink:focus {
   background-color: #2e6da4;
+}
+
+label {
+  display: contents;
 }
