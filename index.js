@@ -46,20 +46,20 @@ jQuery(function ($) {
 
   // When the user clicks the button, open the modal
   $('#filter-button').click(function () {
-    $('#modalFilter').show();
+    $('#modalFilter').fadeIn(150).show();
   });
 
   // When the user clicks on <span> (x), close the modal
   $('.close').click(function () {
-    $('#modalFilter').hide();
-    $('#modalDetails').hide();
+    $('#modalFilter').fadeOut(150).hide();
+    $('#modalDetails').fadeOut(150).hide();
   });
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if (event.target == modalFilter || event.target == modalDetails) {
-      $('#modalFilter').hide();
-      $('#modalDetails').hide();
+      $('#modalFilter').fadeOut(150).hide();
+      $('#modalDetails').fadeOut(150).hide();
     }
   };
 }); //end of jQuery(document).ready
@@ -625,7 +625,7 @@ function assignClickForModal() {
         foundEvent.calenderColor
       );
 
-      $('#modalDetails').show();
+      $('#modalDetails').fadeIn(150).show();
     }
   });
 }
