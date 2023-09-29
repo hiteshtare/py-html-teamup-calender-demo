@@ -307,6 +307,8 @@ input[type='checkbox'] {
 
 .modal-header-details h2 {
   color: white;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 /* Modal Content */
