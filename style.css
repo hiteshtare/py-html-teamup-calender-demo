@@ -267,16 +267,6 @@ input[type='checkbox'] {
   }
 }
 
-@keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
 /* Modal header */
 .modal-header {
   padding: 2px 16px;
@@ -369,4 +359,9 @@ label {
 input[type='checkbox'] {
   width: 16px; /*Desired width*/
   height: 16px; /*Desired height*/
+}
+
+.joinButtonIcon {
+  font-size: 12px;
+  padding-right: 4px;
 }

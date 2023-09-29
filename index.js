@@ -507,7 +507,7 @@ function getCuratedListOfEvents(isFilter = false) {
       const zoomButtonLinkHTML = item.zoomButtonLink
         ? `<a href=${item.zoomButtonLink} target="_blank" rel="nofollow" class="joinButtonLink">
         <span>
-        <i aria-hidden="true" class="fas fa-video" style="color: #fff;"></i> </span>
+        <i aria-hidden="true" class="fas fa-video joinButtonIcon" style="color: #fff;"></i> </span>
         <span style="color: #fff;">Join via Zoom</span>
         </a>`
         : '';
@@ -518,7 +518,7 @@ function getCuratedListOfEvents(isFilter = false) {
       const youtubeButtonLinkHTML = item.youtubeButtonLink
         ? `<a href=${item.youtubeButtonLink} target="_blank" rel="nofollow" class="joinButtonLink">
         <span>
-        <i aria-hidden="true" class="fab fa-youtube" style="color: #fff;"></i> </span>
+        <i aria-hidden="true" class="fab fa-youtube joinButtonIcon" style="color: #fff;"></i> </span>
         <span style="color: #fff;">Join via YouTube</span>
         </a>`
         : '';
