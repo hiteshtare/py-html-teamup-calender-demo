@@ -214,32 +214,24 @@ input[type='checkbox'] {
 
 .filterButton {
   background-color: #bb4f27 !important;
-  padding: 0 2em;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  padding: 18px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
   border: 0;
   outline: 0;
   text-align: left;
-  min-width: 150px;
-  justify-content: space-between;
   color: #f5f5f5 !important;
   cursor: pointer;
   border-style: solid;
-  border-radius: 50px 50px 50px 50px;
+  border-radius: 5px;
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.5);
   height: 50px;
   float: right;
 }
 
-.filterButton::after {
-  font-family: sans-serif;
-  content: '▼';
-  padding-left: 1em;
-}
-
-.button--highlight::after {
-  content: '✓';
+.filterButton:hover,
+.filterButton:focus {
+  text-decoration: underline;
 }
 
 /* The Modal (background) */
