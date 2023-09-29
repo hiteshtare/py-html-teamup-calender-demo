@@ -44,6 +44,7 @@ h4 {
 .spanStyle {
   color: rgb(40, 56, 66);
   font-weight: initial;
+  display: flex;
 }
 
 #divLoader {
@@ -365,4 +366,9 @@ input[type='checkbox'] {
 .joinButtonIcon {
   font-size: 12px;
   padding-right: 4px;
+}
+
+.joinButtonPara {
+  display: flex;
+  margin-bottom: unset !important;
 }

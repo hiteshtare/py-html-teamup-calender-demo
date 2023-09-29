@@ -531,12 +531,12 @@ function getCuratedListOfEvents(isFilter = false) {
         strHTML += `<li> 
          <p ${calenderStyle}> ${liveIndicatorBlock} ${item.calenderLabel}</p>
          <p id="${item.id}" class="title">${item.title}</p>
-         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp; <span class="spanStyle"> ${buttonLinks} </span></p></li>`;
+         <p class="joinButtonPara"><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp; <span class="spanStyle"> ${buttonLinks} </span></p></li>`;
       } else {
         strHTML += `<li>
          <p ${calenderStyle}>${item.calenderLabel}</p>
          <p id="${item.id}" class="title">${item.title}</p>
-         <p><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp; <span class="spanStyle"> ${buttonLinks} </span></p></li>`;
+         <p class="joinButtonPara"><span class="spanStyle">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp; <span class="spanStyle"> ${buttonLinks} </span></p></li>`;
       }
     });
   });
