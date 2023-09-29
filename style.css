@@ -372,3 +372,9 @@ input[type='checkbox'] {
   cursor: pointer;
   color: #bb4f27;
 }
+
+.iconOutline {
+  color: transparent;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #bb4f27;
+}

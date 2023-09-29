@@ -34,10 +34,9 @@ jQuery(function ($) {
 
   //Change icon of Filter button based on checkboxes selected
   if (selectedCheckboxes.length != 0) {
-    $('#filterContent').addClass('filters--active');
-    $('#filter-button').addClass('button--highlight');
+    $('.filterButtonIcon').removeClass('iconOutline');
   } else {
-    $('#filter-button').removeClass('button--highlight');
+    $('.filterButtonIcon').addClass('iconOutline');
   }
 
   // Get the modal
@@ -545,10 +544,11 @@ function getCuratedListOfEvents(isFilter = false) {
 
   var button = document.getElementById('filter-button');
 
+  //Change icon of Filter button based on checkboxes selected
   if (selectedCheckboxes.length != 0) {
-    button.classList.add('button--highlight');
+    $('.filterButtonIcon').removeClass('iconOutline');
   } else {
-    button.classList.remove('button--highlight');
+    $('.filterButtonIcon').addClass('iconOutline');
   }
 
   return strHTML;
