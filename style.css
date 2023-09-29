@@ -369,7 +369,7 @@ input[type='checkbox'] {
 
 .joinButtonPara {
   display: flex;
-  margin-bottom: unset !important;
+  margin-bottom: 4px !important;
 }
 
 .spanjoinButton {
