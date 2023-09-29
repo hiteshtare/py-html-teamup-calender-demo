@@ -269,7 +269,7 @@ input[type='checkbox'] {
 /* Modal header for Details */
 .modal-header-details {
   padding: 2px 16px;
-  background-color: #4f4e49;
+  background-color: #54595f;
   color: white;
   margin: auto;
   width: 80%;
@@ -366,4 +366,19 @@ input[type='checkbox'] {
 .modal-calenderLabel {
   font-weight: 600;
   margin: unset;
+}
+
+.left-btn {
+  float: left;
+}
+
+.left-btn span {
+  color: #bb4f27;
+  margin: unset;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.right-btn {
+  float: right;
 }
