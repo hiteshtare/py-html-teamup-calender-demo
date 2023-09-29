@@ -382,3 +382,12 @@ input[type='checkbox'] {
 .right-btn {
   float: right;
 }
+
+.filterButtonIcon {
+  font-size: 24px;
+  padding-top: 4px;
+  cursor: pointer;
+  color: transparent;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #bb4f27;
+}
