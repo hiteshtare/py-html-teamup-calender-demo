@@ -313,6 +313,7 @@ input[type='checkbox'] {
 
 .title {
   cursor: pointer;
+  margin-bottom: 4px !important;
 }
 
 .title:hover {
