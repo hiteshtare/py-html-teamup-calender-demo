@@ -619,11 +619,21 @@ function assignClickForModal() {
       const modalContentDetails = document.getElementById(
         'modalContentDetails'
       );
-      modalContentDetails.innerHTML = foundEvent.modalContent;
-      $('.modal-header-details').css(
-        'background-color',
-        foundEvent.calenderColor
-      );
+
+      modalContentDetails.innerHTML = '';
+
+      const paraCalenderLabel = document.createElement('p');
+      paraCalenderLabel.style.color = foundEvent.calenderColor;
+      paraCalenderLabel.textContent = foundEvent.calenderLabel;
+      paraCalenderLabel.classList.add('modal-calenderLabel');
+
+      modalContentDetails.append(paraCalenderLabel);
+      modalContentDetails.innerHTML += foundEvent.modalContent;
+
+      // $('.modal-header-details').css(
+      //   'background-color',
+      //   foundEvent.calenderColor
+      // );
 
       $('#modalDetails').fadeIn(150).show();
     }

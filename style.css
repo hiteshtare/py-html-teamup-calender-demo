@@ -362,3 +362,8 @@ input[type='checkbox'] {
 .spanjoinTime {
   padding-top: 8px;
 }
+
+.modal-calenderLabel {
+  font-weight: 600;
+  margin: unset;
+}
