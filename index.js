@@ -612,12 +612,20 @@ function getFilters(className = '') {
 function assignClickForModal() {
   $('p.title').click(function ($event) {
     const id = $event.target.id;
-    const foundModalContent = listOfEventsArr.find(
-      (x) => x.id == id
-    ).modalContent;
+    const foundEvent = listOfEventsArr.find((x) => x.id == id);
 
-    const modalContentDetails = document.getElementById('modalContentDetails');
-    modalContentDetails.innerHTML = foundModalContent;
-    $('#modalDetails').show();
+    if (foundEvent) {
+      foundEvent.modalContent;
+      const modalContentDetails = document.getElementById(
+        'modalContentDetails'
+      );
+      modalContentDetails.innerHTML = foundEvent.modalContent;
+      $('.modal-header-details').css(
+        'background-color',
+        foundEvent.calenderColor
+      );
+
+      $('#modalDetails').show();
+    }
   });
 }
