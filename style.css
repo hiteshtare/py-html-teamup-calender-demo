@@ -354,6 +354,7 @@ label {
 .modalchkLabel,
 .chkLabel {
   cursor: pointer;
+  font-weight: 600;
 }
 
 input[type='checkbox'] {
