@@ -208,7 +208,7 @@ input[type='checkbox'] {
 
 .filterButton {
   background-color: #bb4f27 !important;
-  padding: 1em 2em;
+  padding: 0 2em;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.05em;
