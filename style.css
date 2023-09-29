@@ -360,3 +360,13 @@ input[type='checkbox'] {
 label {
   display: contents;
 }
+
+.modalchkLabel,
+.chkLabel {
+  cursor: pointer;
+}
+
+input[type='checkbox'] {
+  width: 16px; /*Desired width*/
+  height: 16px; /*Desired height*/
+}
