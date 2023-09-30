@@ -160,6 +160,9 @@ ul {
   display: none;
 }
 
+.fa-stack {
+  display: none !important;
+}
 /* Use a media query to add a break point at 800px: */
 @media screen and (max-width: 800px) {
   .left {
@@ -173,6 +176,9 @@ ul {
   }
   .filterButton {
     display: block;
+  }
+  .fa-stack {
+    display: inline-block !important;
   }
 }
 
