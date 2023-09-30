@@ -367,7 +367,7 @@ input[type='checkbox'] {
 }
 
 .filterButtonIcon {
-  font-size: 24px !important;
+  font-size: 26px !important;
   padding-top: 4px;
   cursor: pointer;
   color: #bb4f27;
@@ -377,4 +377,20 @@ input[type='checkbox'] {
   color: transparent;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: #bb4f27;
+}
+
+.filterButton[data-count]:after {
+  position: absolute;
+  right: -10%;
+  top: -10%;
+  content: attr(data-count);
+  font-size: 10px;
+  padding: 0.6em;
+  border-radius: 50%;
+  line-height: 0.8em;
+  color: white;
+  background: #052956;
+  text-align: center;
+  min-width: 1em;
+  font-weight: bold;
 }
