@@ -381,8 +381,8 @@ input[type='checkbox'] {
 
 .filterButton[data-count]:after {
   position: absolute;
-  right: -10%;
-  top: -10%;
+  right: 0%;
+  top: -20%;
   content: attr(data-count);
   font-size: 10px;
   padding: 0.6em;
