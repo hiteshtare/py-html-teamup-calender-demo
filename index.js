@@ -136,10 +136,11 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
   var calendarKey = 'ks8ftmzv9zw938fxfk';
 
+  const noOfDaysFromToday = 0;
   const currentDate = new Date();
   const startDateParam = formatDate(currentDate);
   const endDateParam = formatDate(
-    currentDate.setDate(currentDate.getDate() + 3)
+    currentDate.setDate(currentDate.getDate() + noOfDaysFromToday)
   );
 
   //Passing Date range for events
