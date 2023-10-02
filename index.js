@@ -149,7 +149,9 @@ function makeCorsRequest(url, successCallback, errorCallback) {
     url,
     function (xhr) {
       hideLoader();
+
       var response = JSON.parse(xhr.responseText);
+
       console.warn('Total no. of Events');
       console.log(response);
 
@@ -304,7 +306,13 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
           listOfEvents += getCuratedListOfEvents();
         } //end of if (response['events'].length !== 0)
+        else {
+          listOfEvents = hideCalenderFiltersAndGetErrorHTML();
+        }
       } //end of if if (response && response['events'])
+      else {
+        listOfEvents = hideCalenderFiltersAndGetErrorHTML();
+      }
 
       // Write Javascript code!
       const appDiv = document.getElementById('mainContent');
@@ -641,4 +649,15 @@ function applyStylingBasedOnCheckboxesSelected() {
     $('.filterButtonIcon').addClass('iconOutline');
     $('#filter-button').attr('data-count', selectedCheckboxes.length);
   }
+}
+
+function hideCalenderFiltersAndGetErrorHTML() {
+  $('.left').hide();
+  $('.right-btn').hide();
+
+  const strHTML = `<h4 style="
+  color: grey !important;
+  text-align: center !important;
+"><i class="fa fa-solid fa-exclamation"></i> Sorry, No events found.</h4>`;
+  return strHTML;
 }
