@@ -33,13 +33,7 @@ jQuery(function ($) {
   };
 
   //Change icon of Filter button based on checkboxes selected
-  if (selectedCheckboxes.length != 0) {
-    $('.filterButtonIcon').removeClass('iconOutline');
-    $('#filter-button').attr('data-count', selectedCheckboxes.length);
-  } else {
-    $('.filterButtonIcon').addClass('iconOutline');
-    $('#filter-button').attr('data-count', selectedCheckboxes.length);
-  }
+  applyStylingBasedOnCheckboxesSelected();
 
   // Get the modal
   var modalFilter = document.getElementById('modalFilter');
@@ -136,11 +130,11 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
   var calendarKey = 'ks8ftmzv9zw938fxfk';
 
-  const noOfDaysFromToday = 0;
+  const noOfDaysFromTomorrow = 0;
   const currentDate = new Date();
   const startDateParam = formatDate(currentDate);
   const endDateParam = formatDate(
-    currentDate.setDate(currentDate.getDate() + noOfDaysFromToday)
+    currentDate.setDate(currentDate.getDate() + noOfDaysFromTomorrow)
   );
 
   //Passing Date range for events
@@ -548,13 +542,7 @@ function getCuratedListOfEvents(isFilter = false) {
   var button = document.getElementById('filter-button');
 
   //Change icon of Filter button based on checkboxes selected
-  if (selectedCheckboxes.length != 0) {
-    $('.filterButtonIcon').removeClass('iconOutline');
-    $('#filter-button').attr('data-count', selectedCheckboxes.length);
-  } else {
-    $('.filterButtonIcon').addClass('iconOutline');
-    $('#filter-button').attr('data-count', selectedCheckboxes.length);
-  }
+  applyStylingBasedOnCheckboxesSelected();
 
   return strHTML;
 }
@@ -643,4 +631,14 @@ function assignClickForModal() {
       $('#modalDetails').fadeIn(150).show();
     }
   });
+}
+
+function applyStylingBasedOnCheckboxesSelected() {
+  if (selectedCheckboxes.length != 0) {
+    $('.filterButtonIcon').removeClass('iconOutline');
+    $('#filter-button').attr('data-count', selectedCheckboxes.length);
+  } else {
+    $('.filterButtonIcon').addClass('iconOutline');
+    $('#filter-button').attr('data-count', selectedCheckboxes.length);
+  }
 }
