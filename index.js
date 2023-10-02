@@ -658,6 +658,6 @@ function hideCalenderFiltersAndGetErrorHTML() {
   const strHTML = `<h4 style="
   color: grey !important;
   text-align: center !important;
-"><i class="fa fa-solid fa-exclamation"></i> Sorry, No events found.</h4>`;
+"><i class="fa fa-solid fa-exclamation"></i>No event found.</h4>`;
   return strHTML;
 }
