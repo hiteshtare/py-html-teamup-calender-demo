@@ -492,7 +492,7 @@ function getCuratedListOfEvents(isFilter = false) {
   groupArrays.forEach((group, index) => {
     strHTML += `${
       group.startDate === new Date().getDate()
-        ? `<h4><i>Today</i> — ${group.date}</h4>`
+        ? `<h4>Today, ${group.date}</h4>`
         : `<h4> ${group.date}</h4>`
     }`;
 
@@ -534,12 +534,14 @@ function getCuratedListOfEvents(isFilter = false) {
       if (item.isCurrentTimeBetween) {
         strHTML += `<li> 
          <p ${calenderStyle}> ${liveIndicatorBlock} ${item.calenderLabel}</p>
-         <p id="${item.id}" class="title">${item.title}</p>
+         <p class="title">${item.title}</p>
+         <span id="${item.id}" class="spanmoreInfo">More Info</span>
          <p class="joinButtonPara"><span class="spanStyle spanjoinTime">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp; <span class="spanStyle spanjoinButton"> ${buttonLinks} </span></p></li>`;
       } else {
         strHTML += `<li>
          <p ${calenderStyle}>${item.calenderLabel}</p>
-         <p id="${item.id}" class="title">${item.title}</p>
+         <p class="title">${item.title}</p>
+         <span id="${item.id}" class="spanmoreInfo">More Info</span>
          <p class="joinButtonPara"><span class="spanStyle spanjoinTime">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp; <span class="spanStyle spanjoinButton"> ${buttonLinks} </span></p></li>`;
       }
     });
@@ -611,7 +613,7 @@ function getFilters(className = '') {
 }
 
 function assignClickForModal() {
-  $('p.title').click(function ($event) {
+  $('span.spanmoreInfo').click(function ($event) {
     const id = $event.target.id;
     const foundEvent = listOfEventsArr.find((x) => x.id == id);
 
