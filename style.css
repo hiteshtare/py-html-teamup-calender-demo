@@ -310,16 +310,30 @@ input[type='checkbox'] {
 }
 
 .joinButtonLink {
-  background-color: #052956;
+  background-color: #ffffff;
   cursor: pointer;
   padding: 8px 16px 8px 16px !important;
-  border-radius: 5px;
+  border-radius: 10px;
   text-decoration: none;
 }
 
 .joinButtonLink:hover,
 .joinButtonLink:focus {
-  background-color: #2e6da4;
+  text-decoration: underline;
+}
+
+.buttonZoom {
+  color: #0b5cff;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #0b5cff;
+}
+
+.buttonYoutube {
+  color: #ff0000;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #ff0000;
 }
 
 label {
