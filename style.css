@@ -435,7 +435,10 @@ input[type='checkbox'] {
 }
 
 .spanmoreInfo {
-  text-decoration: underline;
   color: #3366ff;
   cursor: pointer;
+}
+
+.spanmoreInfo:hover {
+  text-decoration: underline;
 }
