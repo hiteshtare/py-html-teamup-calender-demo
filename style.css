@@ -4,6 +4,11 @@ body {
 
 h4 {
   color: #bb4f27 !important;
+  font-size: 20px;
+}
+
+.img-live-now {
+  box-shadow: none !important;
 }
 
 .live-indicator-block {
@@ -288,9 +293,10 @@ input[type='checkbox'] {
 .joinButtonLink {
   background-color: #ffffff;
   cursor: pointer;
-  padding: 10px 16px 8px 16px !important;
+  padding: 12px 24px !important;
   border-radius: 10px;
   text-decoration: none;
+  font-size: 14px;
 }
 
 .joinButtonLink:hover,
