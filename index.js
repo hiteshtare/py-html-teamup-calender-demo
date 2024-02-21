@@ -488,8 +488,8 @@ function getCuratedListOfEvents(isFilter = false) {
   groupArrays.forEach((group, index) => {
     strHTML += `${
       group.startDate === new Date().getDate()
-        ? `<h4>Today, ${group.date}</h4>`
-        : `<h4> ${group.date}</h4>`
+        ? `<h4>Today, ${group.date}</h4>` 
+      : group.startDate === new Date().getDate() + 1 ? `<h4>Tommorow, ${group.date}</h4>` : `<h4>${group.date}</h4>`
     }`;
 
     group.events.forEach((item) => {
