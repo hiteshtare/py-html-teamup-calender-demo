@@ -132,6 +132,8 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
   const noOfDaysFromTomorrow = 2;
   const validEventsCount = 5;
+  const subractMinsFromStartTimeToShowLive = 15;
+
   const validCalenersArr = [9551817, 9613432, 7897161, 9533536, 11986948];
   const validCalenderDict = [{
     id: 9551817,
@@ -236,7 +238,7 @@ function makeCorsRequest(url, successCallback, errorCallback) {
             );
             const startTime =
               new Date(item.start_dt).getHours() * 60 +
-              new Date(item.start_dt).getMinutes();
+              new Date(item.start_dt).getMinutes() - subractMinsFromStartTimeToShowLive;
             // console.warn('startTime');
             // console.log(startTime);
 
