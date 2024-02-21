@@ -149,13 +149,13 @@ ul {
     width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
   }
   .filters {
-    display: block;
+    display: none;
   }
   .filterButton {
-    display: block;
+    display: none;
   }
   .fa-stack {
-    display: inline-block !important;
+    display: none !important;
   }
 }
 
