@@ -145,6 +145,16 @@ ul {
 .fa-stack {
   display: none !important;
 }
+
+.dvcolLeft {
+  float: left;
+  width: 80%;
+}
+.dvcolRight {
+  float: left;
+  width: 20%;
+}
+
 /* Use a media query to add a break point at 800px: */
 @media screen and (max-width: 800px) {
   .left {
@@ -161,6 +171,17 @@ ul {
   }
   .fa-stack {
     display: none !important;
+  }
+
+  .main li {
+    display: grid;
+  }
+
+  .dvcolLeft {
+    width: 100%;
+  }
+  .dvcolRight {
+    width: 100%;
   }
 }
 
@@ -417,9 +438,4 @@ input[type='checkbox'] {
   text-decoration: underline;
   color: #3366ff;
   cursor: pointer;
-}
-
-.dvcolLeft {
-  float: left;
-  width: 80%;
 }
