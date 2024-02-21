@@ -114,7 +114,7 @@ h4 {
 
 .main {
   float: left;
-  width: 70%; /* The width is 80%, by default */
+  width: 100%; /* The width is 80%, by default */
 }
 
 .main li {

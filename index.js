@@ -318,42 +318,6 @@ function makeCorsRequest(url, successCallback, errorCallback) {
       const appDiv = document.getElementById('mainContent');
       appDiv.innerHTML = listOfEvents;
 
-      // Create filter list on the fly
-      const ulcheckboxList = document.getElementById('ulcheckboxList');
-      ulcheckboxList.innerHTML = getFilters();
-
-      console.warn(`On ready: selectedCheckboxes`);
-      console.log(selectedCheckboxes.join(','));
-
-      //Assign click event for Checkboxes
-      const checkboxes = $('.checkbox');
-      for (let checkbox of checkboxes) {
-        $(checkbox).click(function ($event) {
-          var currentValue = +$event.target.value;
-          var isChecked = $event.target.checked;
-
-          if (isChecked) {
-            selectedCheckboxes.push(currentValue);
-          } else {
-            var index = selectedCheckboxes.indexOf(currentValue);
-            selectedCheckboxes.splice(index, 1);
-          }
-          console.warn(`Click: selectedCheckboxes`);
-          console.log(selectedCheckboxes.join(','));
-
-          var filteredHTML = getCuratedListOfEvents(true);
-
-          const appDiv = $('#mainContent');
-          if (appDiv.length !== 0) {
-            appDiv[0].innerHTML = filteredHTML;
-          }
-
-          // When the user clicks the button, open the modal
-          assignClickForModal();
-        });
-      }
-      //Assign click event for Checkboxes
-
       // When the user clicks the button, open the modal
       assignClickForModal();
 
