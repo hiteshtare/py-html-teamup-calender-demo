@@ -130,8 +130,8 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
   var calendarKey = 'ks8ftmzv9zw938fxfk';
 
-  const noOfDaysFromTomorrow = 2;
-  const validEventsCount = 5;
+  const noOfDaysFromTomorrow = 20;
+  const validEventsCount = 100;
   const subractMinsFromStartTimeToShowLive = 15;
 
   const validCalenersArr = [9551817, 9613432, 7897161, 9533536, 11986948];

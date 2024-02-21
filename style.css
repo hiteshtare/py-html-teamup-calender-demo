@@ -148,11 +148,11 @@ ul {
 
 .dvcolLeft {
   float: left;
-  width: 80%;
+  width: 85%;
 }
 .dvcolRight {
   float: left;
-  width: 20%;
+  width: 15%;
 }
 
 /* Use a media query to add a break point at 800px: */
@@ -318,6 +318,7 @@ input[type='checkbox'] {
   border-radius: 10px;
   text-decoration: none;
   font-size: 14px;
+  text-align: center;
 }
 
 .joinButtonLink:hover,
@@ -376,7 +377,6 @@ input[type='checkbox'] {
 
 .spanjoinButton {
   display: grid;
-  height: 40px;
   position: relative;
   top: 15%;
 }
