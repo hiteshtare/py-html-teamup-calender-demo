@@ -130,8 +130,36 @@ function makeCorsRequest(url, successCallback, errorCallback) {
 
   var calendarKey = 'ks8ftmzv9zw938fxfk';
 
-  const noOfDaysFromTomorrow = 0;
-  const currentDate = new Date();
+  const noOfDaysFromTomorrow = 2;
+  const validEventsCount = 5;
+  const validCalenersArr = [9551817, 9613432, 7897161, 9533536, 11986948];
+  const validCalenderDict = [{
+    id: 9551817,
+    checkboxColor:'#2951B9',
+    checkboxLabel:'English Meditations'
+  },
+  {
+    id:9613432,
+    checkboxColor: '#B20D47',
+    checkboxLabel: 'Hindi Meditations'
+  },
+  {
+    id:7897161,
+    checkboxColor: '#CA7609',
+    checkboxLabel: 'Sannyasi-led Event',
+    },
+  {
+    id:9533536,
+    checkboxColor: '#176413',
+    checkboxLabel: 'Indian Language Meditation',
+  },
+  {
+    id:11986948,
+    checkboxColor: '#B84E9D',
+    checkboxLabel: 'Study Groups i English & Indian'
+  }];
+
+  const currentDate = new Date(),
   const startDateParam = formatDate(currentDate);
   const endDateParam = formatDate(
     currentDate.setDate(currentDate.getDate() + noOfDaysFromTomorrow)
@@ -158,6 +186,9 @@ function makeCorsRequest(url, successCallback, errorCallback) {
       if (response && response['events']) {
         if (response['events'].length !== 0) {
           console.log(response['events'].length);
+
+          console.warn(`noOfDaysFromTomorrow: ${noOfDaysFromTomorrow}`);
+          console.warn(`validEventsCount: ${validEventsCount}`);
 
           let parser = new DOMParser();
 
@@ -240,10 +271,6 @@ function makeCorsRequest(url, successCallback, errorCallback) {
             let calenderColor = '#2951B9';
             let calenderLabel = 'English Meditations';
 
-            const validCalenersArr = [
-              9551817, 9613432, 7897161, 9533536, 11986948,
-            ];
-
             switch (item.subcalendar_id) {
               case 9551817:
                 calenderColor = '#2951B9';
@@ -282,8 +309,11 @@ function makeCorsRequest(url, successCallback, errorCallback) {
               }
             }
 
-            //To check if subcalendar_id matches with Valid Calender configured then push in listOfEventsArr
-            if (validCalenersArr.includes(item.subcalendar_id)) {
+            //To check if subcalendar_id matches with Valid Calender configured then push in listOfEventsArr and Array count is less than equal to validEventsCount
+            if (
+              validCalenersArr.includes(item.subcalendar_id) &&
+              listOfEventsArr.length < validEventsCount
+            ) {
               listOfEventsArr.push({
                 id: index,
                 title: item.title,
