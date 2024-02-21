@@ -463,13 +463,12 @@ function getCuratedListOfEvents(isFilter = false) {
     group.events.forEach((item) => {
       const calenderStyle = `style="color:${item.calenderColor}"`;
 
-      const liveIndicatorBlock = `<span class="live-indicator-block">
-    <span class="live-indicator">
-    <span class="indicator online"></span>
-    <span style="padding: 2px;
-       vertical-align: top;">Live</span>
-    </span>
-    </span>`;
+      const liveIndicatorBlock = `
+      <p class="live-indicator-block">
+      <img decoding="async" src="https://dev.yssofindia.org/wp-content/uploads/elementor/thumbs/livenowred1-qk177bnrgperyu53uz25h8owuyzwi7zcnq2yhkotrg.png" title="livenowred1" alt="livenowred1">
+    <span class="live-now">LIVE NOW</span>
+    </p>
+    `;
 
       let buttonLinks = '';
       const zoomButtonLinkHTML = item.zoomButtonLink
@@ -497,16 +496,28 @@ function getCuratedListOfEvents(isFilter = false) {
 
       if (item.isCurrentTimeBetween) {
         strHTML += `<li> 
-         <p ${calenderStyle}> ${liveIndicatorBlock} ${item.calenderLabel}</p>
-         <p class="title">${item.title}</p>
-         <span id="${item.id}" class="spanmoreInfo">More Info</span>
-         <p class="joinButtonPara"><span class="spanStyle spanjoinTime">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp; <span class="spanStyle spanjoinButton"> ${buttonLinks} </span></p></li>`;
-      } else {
-        strHTML += `<li>
+        <div class="dvcolLeft">
+         ${liveIndicatorBlock}
          <p ${calenderStyle}>${item.calenderLabel}</p>
          <p class="title">${item.title}</p>
          <span id="${item.id}" class="spanmoreInfo">More Info</span>
-         <p class="joinButtonPara"><span class="spanStyle spanjoinTime">${item.startTimeStr} - ${item.endTimeStr}</span> &ensp; <span class="spanStyle spanjoinButton"> ${buttonLinks} </span></p></li>`;
+         <p class="joinButtonPara"><span class="spanStyle spanjoinTime">${item.startTimeStr} - ${item.endTimeStr}</span></p>
+         </div>
+         <div class="dvcolRight">
+         <span class="spanStyle spanjoinButton"> ${buttonLinks} </span>
+         </div></li>`;
+      } else {
+        strHTML += `<li>
+        <div class="dvcolLeft">
+        <p ${calenderStyle}>${item.calenderLabel}</p>
+        <p class="title">${item.title}</p>
+        <span id="${item.id}" class="spanmoreInfo">More Info</span>
+        <p class="joinButtonPara"><span class="spanStyle spanjoinTime">${item.startTimeStr} - ${item.endTimeStr}</span></p>
+        </div>
+        <div class="dvcolRight">
+        <span class="spanStyle spanjoinButton"> ${buttonLinks} </span>
+        </div>
+        </li>`;
       }
     });
   });

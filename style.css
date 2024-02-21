@@ -6,39 +6,14 @@ h4 {
   color: #bb4f27 !important;
 }
 
-.live-indicator-block .live-indicator {
-  background: #ea2429;
-  color: #fff;
-  padding: 5px;
-  line-height: 1;
-  border-radius: 6px;
-  text-transform: uppercase;
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 12px;
-  font-weight: bold;
-  width: auto;
-  height: 22px;
+.live-indicator-block {
+  display: flex;
 }
 
-.indicator.online {
-  vertical-align: middle;
-  background: #fff;
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  -webkit-animation: pulse-animation 1s cubic-bezier(0.5, 0, 1, 1) infinite
-    alternate;
-}
-
-@-webkit-keyframes pulse-animation {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+.live-now {
+  padding: 7px 0 0 6px;
+  color: #ff0000;
+  font-weight: bolder;
 }
 
 .spanStyle {
@@ -118,7 +93,7 @@ h4 {
 }
 
 .main li {
-  display: list-item;
+  display: flex;
   text-align: -webkit-match-parent;
   list-style-type: none;
   /* margin-top: 1em; */
@@ -288,6 +263,7 @@ input[type='checkbox'] {
   font-size: 20px !important;
   /* cursor: pointer; */
   margin-bottom: 4px !important;
+  margin-right: 4px !important;
 }
 
 .title:hover {
@@ -312,7 +288,7 @@ input[type='checkbox'] {
 .joinButtonLink {
   background-color: #ffffff;
   cursor: pointer;
-  padding: 8px 16px 8px 16px !important;
+  padding: 10px 16px 8px 16px !important;
   border-radius: 10px;
   text-decoration: none;
 }
@@ -372,7 +348,10 @@ input[type='checkbox'] {
 }
 
 .spanjoinButton {
-  display: flex;
+  display: grid;
+  height: 40px;
+  position: relative;
+  top: 15%;
 }
 
 .spanjoinTime {
@@ -432,4 +411,9 @@ input[type='checkbox'] {
   text-decoration: underline;
   color: #3366ff;
   cursor: pointer;
+}
+
+.dvcolLeft {
+  float: left;
+  width: 80%;
 }
