@@ -333,7 +333,7 @@ input[type='checkbox'] {
 
 .joinButtonLink:hover,
 .joinButtonLink:focus {
-  text-decoration: underline;
+  text-decoration: none !important;
 }
 
 .buttonZoom {
@@ -348,6 +348,11 @@ input[type='checkbox'] {
   color: #0b5cff !important;
 }
 
+.buttonZoomText:hover,
+.buttonZoomText:focus {
+  text-decoration: underline;
+}
+
 .buttonYoutube {
   color: #ff0000;
   border-style: solid;
@@ -358,6 +363,11 @@ input[type='checkbox'] {
 .buttonYoutube:hover,
 .buttonYoutube:focus {
   color: #ff0000;
+}
+
+.buttonYoutubeText:hover,
+.buttonYoutubeText:focus {
+  text-decoration: underline;
 }
 
 label {
