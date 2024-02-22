@@ -497,7 +497,7 @@ function getCuratedListOfEvents(isFilter = false) {
 
       const liveIndicatorBlock = `
       <p class="live-indicator-block">
-      <img decoding="async" src="https://dev.yssofindia.org/wp-content/uploads/elementor/thumbs/livenowred1-qk177bnrgperyu53uz25h8owuyzwi7zcnq2yhkotrg.png" title="livenowred1" alt="livenowred1">
+      <img class="img-live-now" src="https://dev.yssofindia.org/wp-content/uploads/elementor/thumbs/livenowred1-qk177bnrgperyu53uz25h8owuyzwi7zcnq2yhkotrg.png" title="livenowred1" alt="livenowred1">
     <span class="live-now">LIVE NOW</span>
     </p>
     `;
