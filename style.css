@@ -101,8 +101,8 @@ h4 {
   display: flex;
   text-align: -webkit-match-parent;
   list-style-type: none;
-  /* margin-top: 1em; */
-  margin-bottom: 10px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   padding-inline-start: 10px;
   padding-inline-end: 10px;
   padding-top: 10px;
@@ -131,7 +131,7 @@ ul {
 
 .main p {
   margin: unset;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   font-size: 16px;
 }
 
@@ -148,11 +148,11 @@ ul {
 
 .dvcolLeft {
   float: left;
-  width: 85%;
+  width: 80%;
 }
 .dvcolRight {
   float: left;
-  width: 15%;
+  width: 20%;
 }
 
 /* Use a media query to add a break point at 800px: */
@@ -312,13 +312,16 @@ input[type='checkbox'] {
 }
 
 .joinButtonLink {
+  min-width: 206px;
   background-color: #ffffff;
   cursor: pointer;
-  padding: 12px 24px !important;
+  padding: 10px !important;
   border-radius: 10px;
   text-decoration: none;
   font-size: 14px;
+  font-weight: 500 !important;
   text-align: center;
+  height: 40px;
 }
 
 .joinButtonLink:hover,
@@ -327,7 +330,7 @@ input[type='checkbox'] {
 }
 
 .buttonZoom {
-  color: #0b5cff;
+  color: #0b5cff !important;
   border-style: solid;
   border-width: 1px 1px 1px 1px;
   border-color: #0b5cff;
@@ -335,7 +338,7 @@ input[type='checkbox'] {
 
 .buttonZoom:hover,
 .buttonZoom:focus {
-  color: #0b5cff;
+  color: #0b5cff !important;
 }
 
 .buttonYoutube {
