@@ -393,12 +393,13 @@ input[type='checkbox'] {
 
 .left-btn {
   float: left;
+  padding-bottom: 20px;
 }
 
 .left-btn span {
   color: #bb4f27;
   margin: unset;
-  font-size: 28px;
+  font-size: 25px;
   font-weight: 500;
 }
 
